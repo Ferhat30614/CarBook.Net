@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace CarBook.Domain.Entities
 {
-    public class Service
+    public class FooterAddress
     {
-        public int ServiceID { get; set; }
-        public string Title { get; set; }
+        public int FooterAddressID { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
     }
 }
