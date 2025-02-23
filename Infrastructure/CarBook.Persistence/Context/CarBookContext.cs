@@ -12,7 +12,8 @@ namespace CarBook.Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-3SL2AV2\\FerhatMSSQLSERVE;initial Catalog=CarBookDb;integrated security=true");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-3SL2AV2\\FerhatMSSQLSERVE;Database=CarBookDb;" +
+                "User ID=sa;Password=ferhat123;TrustServerCertificate=True");
         }
 
         public DbSet<About> Abouts { get; set; }
