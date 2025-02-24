@@ -1,4 +1,5 @@
-﻿using CarBook.Application.Interfaces;
+﻿using CarBook.Application.Features.CQRS.Commands.AboutCommands;
+using CarBook.Application.Interfaces;
 using CarBook.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,12 @@ namespace CarBook.Application.Features.CQRS.Handlers.AboutHandlers
         public RemoveAboutCommandHandler(IRepository<About> repository)
         {
             _repository = repository;
+        }
+        public async Task Handle(RemoveAboutCommand command) 
+        {
+            var values = await _repository.GetByIdAsync(command.Id);
+            await _repository.RemoveAsync(values);
+        
         }
     }
 }
