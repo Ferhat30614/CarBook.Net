@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CarBook.Application.Features.CQRS.Commands.AboutCommands;
+using CarBook.Application.Features.CQRS.Queries.BannerQueries;
+using CarBook.Application.Interfaces;
+using CarBook.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +12,20 @@ namespace CarBook.Application.Features.CQRS.Handlers.BannerHandlers
 {
     public class RemoveBannerCommandHandler
     {
+        private readonly IRepository<About> _repository;
+
+        public RemoveBannerCommandHandler(IRepository<About> repository)
+        {
+            _repository = repository;
+        }
+        public async Task Handle(GetBannerByIdQuery query)
+        {
+            var values=await _repository.GetByIdAsync(query.Id);    
+
+            await _repository.RemoveAsync(values);
+
+           
+
+        }
     }
 }
