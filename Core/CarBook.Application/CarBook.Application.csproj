@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Features\CQRS\Commands\" />
-    <Folder Include="Features\CQRS\Handlers\" />
-    <Folder Include="Features\CQRS\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CarBook.Domain\CarBook.Domain.csproj" />
   </ItemGroup>
 
 </Project>
