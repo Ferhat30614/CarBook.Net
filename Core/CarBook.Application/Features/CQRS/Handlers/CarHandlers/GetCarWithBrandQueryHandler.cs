@@ -1,32 +1,26 @@
 ﻿using CarBook.Application.Features.CQRS.Results.CarResults;
 using CarBook.Application.Interfaces;
+using CarBook.Application.Interfaces.CarInterfaces;
 using CarBook.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
 {
     public class GetCarWithBrandQueryHandler
     {
+        private readonly ICarRepository _carRepository;
 
-
-
-        private readonly IRepository<Car> _repository;
-
-        public GetCarWithBrandQueryHandler(IRepository<Car> repository)
+        public GetCarWithBrandQueryHandler(ICarRepository carRepository)
         {
-            _repository = repository;
+            _carRepository = carRepository;
         }
 
-        public async Task<List<GetCarWithBrandQueryResult>> Handle()
+        public  List<GetCarWithBrandQueryResult> Handle()
         {
             
 
 
-            var values = await _repository.GetAllAsync();
+            var values =  _carRepository.GetCarsListWithBrands();
             return values.Select(x => new GetCarWithBrandQueryResult
             {
                 CarID = x.CarID,
