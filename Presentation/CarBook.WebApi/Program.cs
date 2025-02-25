@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<CarBookContext>();  //contexti ekledim
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));// IRepository gördüğün yerler Repository dir dedim
-builder.Services.AddScoped(typeof(ICarRepository<>), typeof(CarRepository<>));// ICarRepository gördüğün yerler Repository dir dedim
+builder.Services.AddScoped(typeof(ICarRepository), typeof(CarRepository));// ICarRepository gördüğün yerler Repository dir dedim  //bunları olusturuken generic kullanmadımdan burda tanımlarkende gerek yok herhalede
 
 builder.Services.AddScoped<CreateAboutCommandHandler>();//CQRS için configureler 
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
