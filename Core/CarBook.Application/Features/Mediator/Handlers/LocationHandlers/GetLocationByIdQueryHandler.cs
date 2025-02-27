@@ -24,8 +24,8 @@ namespace CarBook.Application.Features.Mediator.Handlers.LocationHandlers
             var values= await _repository.GetByIdAsync(request.Id);
 
             return new GetLocationByIdQueryResult { 
-            Name=values.Name,
-            LocationID=values.LocationID,   
+            Name=values.Name,  
+            LocationID=values.LocationID
             };
         }
     }

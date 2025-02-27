@@ -12,9 +12,9 @@ namespace CarBook.Application.Features.Mediator.Queries.LocationQueries
     {
         public int Id { get; set; }
 
-        public GetLocationByIdQuery(int ıd)
+        public GetLocationByIdQuery(int id)
         {
-            Id = ıd;
+            Id = id;
         }
     }
 }

@@ -17,37 +17,42 @@ namespace CarBook.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LocationList() 
+        public async Task<IActionResult> LocationList()
         {
             var values = await _mediator.Send(new GetLocationQuery());
-            return Ok(values);        
+            return Ok(values);
+
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLocation(int id)
         {
-            var values = _mediator.Send(new GetLocationByIdQuery(id));
+            var values = await _mediator.Send(new GetLocationByIdQuery(id));
             return Ok(values);
+
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateLocation(CreateLocationCommand command)
         {
-            var values = _mediator.Send(command);
-            return Ok("Konum eklendi");
+            await _mediator.Send(command);
+            return Ok("Özellik eklendi");
         }
-        [HttpPut]
-        public async Task<IActionResult> UpdateLocation(UpdateLocationCommand command)
-        {
-            var values = _mediator.Send(command);
-            return Ok("Konum Güncellendi");
-        
-        }
+
         [HttpDelete]
         public async Task<IActionResult> RemoveLocation(int id)
         {
-            var values = _mediator.Send(new RemoveLocationCommand(id));
-            return Ok("Konum silindi");
+            await _mediator.Send(new RemoveLocationCommand(id));
+            return Ok("Özellik silindi");
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateLocation(UpdateLocationCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok("Özellik güncellendi");
+        }
+
 
     }
 }
