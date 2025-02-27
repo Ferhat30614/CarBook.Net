@@ -26,7 +26,8 @@ namespace CarBook.Application.Features.Mediator.Handlers.PricingHandlers
             return values.Select(x => new GetPricingQueryResult
             {
                 PricingID = x.PricingID,
-               Name = x.Name,   
+                Name = x.Name,
             }).ToList();
         }
     }
+}

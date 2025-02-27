@@ -1,4 +1,5 @@
 ﻿using CarBook.Application.Features.Mediator.Commands.PricingCommands;
+using CarBook.Application.Features.Mediator.Commands.PricingCommands;
 using CarBook.Application.Interfaces;
 using CarBook.Domain.Entities;
 using MediatR;
