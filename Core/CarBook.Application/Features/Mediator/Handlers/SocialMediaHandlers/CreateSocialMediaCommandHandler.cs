@@ -1,5 +1,4 @@
 ﻿using CarBook.Application.Features.Mediator.Commands.SocialMediaCommands;
-using CarBook.Application.Features.Mediator.Commands.SocialMediaCommands;
 using CarBook.Application.Interfaces;
 using CarBook.Domain.Entities;
 using MediatR;
@@ -25,6 +24,8 @@ namespace CarBook.Application.Features.Mediator.Handlers.SocialMediaHandlers
             await _repository.CreateAsync(new SocialMedia
             {
                 Name = request.Name,
+                Url = request.Url,  
+                Icon= request.Icon, 
             });
         }
     }
