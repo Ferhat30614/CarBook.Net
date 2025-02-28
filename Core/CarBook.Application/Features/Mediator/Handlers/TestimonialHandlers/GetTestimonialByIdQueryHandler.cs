@@ -27,6 +27,9 @@ namespace CarBook.Application.Features.Mediator.Handlers.TestimonialHandlers
             {
                 TestimonialID = values.TestimonialID,
                 Name = values.Name,
+                Title = values.Title,
+                Comment = values.Comment,   
+                ImageUrl = values.ImageUrl,
             };
         }
     }
