@@ -13,7 +13,7 @@ namespace CarBook.WebUI.ViewComponents.AboutViewComponents
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IViewComponentResult> Invoke() 
+        public async Task<IViewComponentResult> InvokeAsync() 
         {
             var client=_httpClientFactory.CreateClient();
             var responseMessage =await client.GetAsync("https://localhost:7192/api/Abouts");
@@ -21,6 +21,7 @@ namespace CarBook.WebUI.ViewComponents.AboutViewComponents
             {
                 var dataJson = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(dataJson);
+                return View(values);    
             
             }
             return View();
