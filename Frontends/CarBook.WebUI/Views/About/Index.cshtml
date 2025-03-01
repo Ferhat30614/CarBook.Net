@@ -3,16 +3,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
-
-
-
-
-@await Component.InvokeAsync("_AboutUsComponentPartial");
-
-@await Component.InvokeAsync("_BecomeADriverComponentPartial");
-
-@await Component.InvokeAsync("_TestimonialComponentPartial");
-
+@await Component.InvokeAsync("_AboutUsComponentPartial")
+@await Component.InvokeAsync("_BecomeADriverComponentPartial")
+@await Component.InvokeAsync("_TestimonialComponentPartial")
 <section class="ftco-counter ftco-section img" id="section-counter">
     <div class="overlay"></div>
     <div class="container">

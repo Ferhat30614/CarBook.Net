@@ -8340,12 +8340,13 @@ h1, h2, h3, h4, h5,
   text-transform: uppercase; }
 
 .hero-wrap {
-  width: 100%;
-  height: 850px;
-  position: inherit;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top center; }
+    width: 100%;
+    height: 850px;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
   @media (max-width: 1199.98px) {
     .hero-wrap {
       background-position: center center !important; } }
@@ -8365,14 +8366,14 @@ h1, h2, h3, h4, h5,
       .hero-wrap .overlay {
         height: 1150px; } }
   .hero-wrap.hero-wrap-2 {
-    height: 600px !important;
+    height: 500px !important;
     position: relative; }
     .hero-wrap.hero-wrap-2 .overlay {
       width: 100%;
       opacity: .3;
-      height: 600px; }
+      height: 500px; }
     .hero-wrap.hero-wrap-2 .slider-text {
-      height: 600px !important; }
+      height: 500px !important; }
 
 .slider-text {
   height: 850px; }
@@ -9134,11 +9135,19 @@ textarea.form-control {
   font-size: 24px; }
 
 .ftco-section {
-  padding: 6em 0;
-  position: relative; }
-  @media (max-width: 767.98px) {
+    padding: 2em 0 0 0 !important; /* Alt padding sıfırlandı */
+    position: relative;
+}
+
+@media (max-width: 767.98px) {
     .ftco-section {
-      padding: 6em 0; } }
+        padding: 2em 0 0 0 !important;
+    }
+
+    .ftco-footer {
+        padding: 2em 0 !important; /* Küçük ekranlarda daha az boşluk */
+    }
+}
 
 .ftco-no-pt {
   padding-top: 0; }
@@ -9150,9 +9159,11 @@ textarea.form-control {
   background: #3c312e; }
 
 .ftco-footer {
-  font-size: 16px;
-  background: #000;
-  padding: 7em 0; }
+    font-size: 16px;
+    background: #000;
+    padding: 3em 0 !important; /* Eski değer: 7em → 3em yapıldı */
+    margin-top: 0 !important;
+}
   .ftco-footer .logo {
     text-transform: uppercase;
     font-weight: 700;
@@ -9946,3 +9957,8 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
