@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Handlers.LocationHandlers
 {
-    public class UpdateLocationCommandHandler : IRequestHandler<UpdateLocationCommand>
+    public class UpdateAuthorCommandHandler : IRequestHandler<UpdateLocationCommand>
     {
         private readonly IRepository<Location> _repository;
-        public UpdateLocationCommandHandler(IRepository<Location> repository)
+        public UpdateAuthorCommandHandler(IRepository<Location> repository)
         {
             _repository = repository;
         }
