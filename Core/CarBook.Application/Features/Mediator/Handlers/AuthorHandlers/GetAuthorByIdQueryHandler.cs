@@ -25,7 +25,9 @@ namespace CarBook.Application.Features.Mediator.Handlers.AuthorHandlers
 
             return new GetAuthorByIdQueryResult { 
             Name=values.Name,  
-            AuthorID=values.AuthorID
+            AuthorID=values.AuthorID,
+            ImageUrl=values.ImageUrl,   
+            Description=values.Description,
             };
         }
     }

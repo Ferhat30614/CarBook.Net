@@ -21,7 +21,9 @@ namespace CarBook.Application.Features.Mediator.Handlers.AuthorHandlers
         {
             await _repository.CreateAsync(new Author
             {
-                Name = request.Name,    
+                Name = request.Name,
+                ImageUrl = request.ImageUrl,
+                Description = request.Description, 
             });
 
         }
