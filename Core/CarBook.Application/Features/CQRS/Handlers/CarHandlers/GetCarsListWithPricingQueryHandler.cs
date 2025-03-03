@@ -26,6 +26,7 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
                 BrandName=x.Car.Brand.Name, 
                 PricingAmount=x.Amount, 
                 CoverImageUrl=x.Car.CoverImageUrl,
+                PricingName=x.Pricing.Name, 
 
             }).ToList();
 

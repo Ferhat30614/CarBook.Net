@@ -13,6 +13,6 @@ namespace CarBook.Application.Features.CQRS.Results.CarResults
         public string BrandName { get; set; }
         public string CoverImageUrl { get; set; }
         public  decimal PricingAmount { get; set; }
-        public  decimal PricingName { get; set; }
+        public  string PricingName { get; set; }
     }
 }
