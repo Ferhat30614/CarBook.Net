@@ -19,7 +19,7 @@ namespace CarBook.WebApi.Controllers
         private readonly UpdateCarCommandHandler _updateCarCommandHandler;
         private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler;
         private readonly GetLast5CarWithBrandQueryHandler _getLast5CarWithBrandQueryHandler;
-        private readonly GetCarsListWithPricingQueryHandler _getCarsListWithPricingQueryHandler;
+
 
         public CarsController(CreateCarCommandHandler createCarCommandHandler,
             GetCarByIdQueryHandler getCarByIdQueryHandler,
@@ -27,8 +27,7 @@ namespace CarBook.WebApi.Controllers
             RemoveCarCommandHandler removeCarCommandHandler,
             UpdateCarCommandHandler updateCarCommandHandler,
             GetCarWithBrandQueryHandler getCarWithBrandQueryHandler,
-            GetLast5CarWithBrandQueryHandler getLast5CarWithBrandQueryHandler,
-            GetCarsListWithPricingQueryHandler getCarsListWithPricingQueryHandler)
+            GetLast5CarWithBrandQueryHandler getLast5CarWithBrandQueryHandler)
         {
             _createCarCommandHandler = createCarCommandHandler;
             _getCarByIdQueryHandler = getCarByIdQueryHandler;
@@ -37,7 +36,6 @@ namespace CarBook.WebApi.Controllers
             _updateCarCommandHandler = updateCarCommandHandler;
             _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
             _getLast5CarWithBrandQueryHandler = getLast5CarWithBrandQueryHandler;
-            _getCarsListWithPricingQueryHandler = getCarsListWithPricingQueryHandler;   
         }
 
 
@@ -58,12 +56,9 @@ namespace CarBook.WebApi.Controllers
         {
             var values = _getLast5CarWithBrandQueryHandler.Handle();
             return Ok(values);
-        } [HttpGet("GetCarsListWithPricing")]
-        public IActionResult GetCarsListWithPricing()
-        {
-            var values = _getCarsListWithPricingQueryHandler.Handle();
-            return Ok(values);
-        }
+        } 
+        
+       
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCar(int id)
         {
