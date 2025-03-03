@@ -19,6 +19,7 @@ namespace CarBook.WebApi.Controllers
         private readonly UpdateCarCommandHandler _updateCarCommandHandler;
         private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler;
         private readonly GetLast5CarWithBrandQueryHandler _getLast5CarWithBrandQueryHandler;
+        private readonly GetCarsListWithPricingQueryHandler _getCarsListWithPricingQueryHandler;
 
         public CarsController(CreateCarCommandHandler createCarCommandHandler,
             GetCarByIdQueryHandler getCarByIdQueryHandler,
@@ -26,7 +27,8 @@ namespace CarBook.WebApi.Controllers
             RemoveCarCommandHandler removeCarCommandHandler,
             UpdateCarCommandHandler updateCarCommandHandler,
             GetCarWithBrandQueryHandler getCarWithBrandQueryHandler,
-            GetLast5CarWithBrandQueryHandler getLast5CarWithBrandQueryHandler)
+            GetLast5CarWithBrandQueryHandler getLast5CarWithBrandQueryHandler,
+            GetCarsListWithPricingQueryHandler getCarsListWithPricingQueryHandler)
         {
             _createCarCommandHandler = createCarCommandHandler;
             _getCarByIdQueryHandler = getCarByIdQueryHandler;
@@ -35,6 +37,7 @@ namespace CarBook.WebApi.Controllers
             _updateCarCommandHandler = updateCarCommandHandler;
             _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
             _getLast5CarWithBrandQueryHandler = getLast5CarWithBrandQueryHandler;
+            _getCarsListWithPricingQueryHandler = getCarsListWithPricingQueryHandler;   
         }
 
 
@@ -54,6 +57,11 @@ namespace CarBook.WebApi.Controllers
         public IActionResult GetLast5CarWithBrand()
         {
             var values = _getLast5CarWithBrandQueryHandler.Handle();
+            return Ok(values);
+        } [HttpGet("GetCarsListWithPricing")]
+        public IActionResult GetCarsListWithPricing()
+        {
+            var values = _getCarsListWithPricingQueryHandler.Handle();
             return Ok(values);
         }
         [HttpGet("{id}")]
