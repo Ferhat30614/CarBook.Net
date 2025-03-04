@@ -28,5 +28,14 @@ namespace CarBook.WebUI.Controllers
             }
             return View();
         }
+
+        public IActionResult BlogDetails()
+        {
+
+            ViewBag.v1 = "BloglarDetay";
+            ViewBag.v2 = "Yazarlarımızın Bloglarını detayı";
+            
+            return View();
+        }
     }
 }
