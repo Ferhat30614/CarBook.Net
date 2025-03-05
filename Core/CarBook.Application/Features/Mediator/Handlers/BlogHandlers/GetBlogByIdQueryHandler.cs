@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Handlers.BlogHandlers
 {
-    public class GetAuthorByIdQueryHandler:IRequestHandler<GetBlogByIdQuery, GetBlogByIdQueryResult>
+    public class GetBlogByIdQueryHandler : IRequestHandler<GetBlogByIdQuery, GetBlogByIdQueryResult>
     {
         private readonly IRepository<Blog> _repository;
-        public GetAuthorByIdQueryHandler(IRepository<Blog> repository)
+        public GetBlogByIdQueryHandler(IRepository<Blog> repository)
         {
             _repository = repository;
         }
@@ -31,6 +31,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogHandlers
             Title = values.Title,
             CoverImage = values.CoverImage,
             CreatedDate = values.CreatedDate,
+            Description = values.Description,   
 
             };
         }
