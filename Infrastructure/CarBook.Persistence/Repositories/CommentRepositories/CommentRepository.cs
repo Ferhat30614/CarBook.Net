@@ -1,4 +1,5 @@
-﻿using CarBook.Application.Features.RepositoryPattern;
+﻿using CarBook.Application.Features.Mediator.Results.BlogResults;
+using CarBook.Application.Features.RepositoryPattern;
 using CarBook.Domain.Entities;
 using CarBook.Persistence.Context;
 using System;
@@ -26,8 +27,17 @@ namespace CarBook.Persistence.Repositories.CommentRepositories
 
         public List<Comment> GetAll()
         {
-            return _context.Comments.ToList();
-     
+            var values=_context.Comments.ToList();
+             return values.Select(x => new Comment
+            {
+                CommentID = x.CommentID,
+                Name = x.Name,
+                CreatedDate = x.CreatedDate,
+                Description = x.Description,
+                BlogID = x.BlogID,
+
+
+            }).ToList();
         }
 
         public Comment GetById(int id)
