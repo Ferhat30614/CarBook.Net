@@ -20,13 +20,14 @@ namespace CarBook.Persistence.Repositories.CommentRepositories
 
         public void Create(Comment entity)
         {
-           _context.Comments.Add(entity);   
-            _context.SaveChanges(); 
+            _context.Comments.Add(entity);
+            _context.SaveChanges();
         }
 
         public List<Comment> GetAll()
         {
-           return _context.Comments.ToList();   
+            return _context.Comments.ToList();
+     
         }
 
         public Comment GetById(int id)
@@ -44,7 +45,7 @@ namespace CarBook.Persistence.Repositories.CommentRepositories
         public void Update(Comment entity)
         {
             _context.Comments.Update(entity);
-            _context.SaveChanges();  
+            _context.SaveChanges();
 
         }
     }
