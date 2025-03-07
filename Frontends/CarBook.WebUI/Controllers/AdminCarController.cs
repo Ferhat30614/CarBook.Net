@@ -47,6 +47,7 @@ namespace CarBook.WebUI.Controllers
             ViewBag.BrandValues = brandValues;   
 
             return View();
+            
         
         }
     }
