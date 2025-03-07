@@ -9,43 +9,22 @@
 @await Html.PartialAsync("/Views/AdminLayout/AdminHeaderPartial.cshtml")
 
 <body>
-
-    <!-- Begin page -->
+    
     <div id="layout-wrapper">
 
         @await Html.PartialAsync("/Views/AdminLayout/AdminNavBarPartial.cshtml")
 
         @await Html.PartialAsync("/Views/AdminLayout/AdminSideBarPartial.cshtml")
-       
-       
-
+        
         <div class="main-content">
-            @RenderBody()
-          
-            <!-- End Page-content -->
+            @RenderBody()         
+         
             @await Html.PartialAsync("/Views/AdminLayout/AdminFooterPartial.cshtml")
-          
-
         </div>
-        <!-- end main content-->
 
     </div>
-    <!-- END layout-wrapper -->
-    <!-- Overlay-->
-    <div class="menu-overlay"></div>
 
-
-    <!-- jQuery  -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/metismenu.min.js"></script>
-    <script src="assets/js/waves.js"></script>
-    <script src="assets/js/simplebar.min.js"></script>
-
-    <!-- App js -->
-    <script src="assets/js/theme.js"></script>
-
+    @await Html.PartialAsync("/Views/AdminLayout/AdminScriptPartial.cshtml")
 </body>
-
 </html>
 
