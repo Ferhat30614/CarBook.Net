@@ -18,52 +18,45 @@
                         </p>
                         <form method="post">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Marka</label>
+                                <label for="exampleInput">Marka</label>
                                 @Html.DropDownListFor(x => x.BrandID, (List<SelectListItem>)ViewBag.BrandValues,
                                 new {@class="form-control"})                               
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputModel">Model</label>
-                                <input type="text" class="form-control" id="exampleInputModel" asp-for="Model" placeholder="Model gir">
+                                <input type="text" class="form-control" id="exampleInputModel" asp-for="Model">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputModel">Kapak Fotoğrafı</label>
-                                <input type="text" class="form-control" id="exampleInputModel" asp-for="Model" placeholder="Model gir">
+                                <label for="exampleInputCoverImage">Kapak Fotoğrafı</label>
+                                <input type="text" class="form-control" id="exampleInputCoverImage" asp-for="CoverImageUrl">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputModel">km</label>
-                                <input type="text" class="form-control" id="exampleInputModel" asp-for="Model" placeholder="Model gir">
+                                <label for="exampleInputKm">km</label>
+                                <input type="text" class="form-control" id="exampleInputKm" asp-for="Km">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputModel">vites Türü</label>
-                                <input type="text" class="form-control" id="exampleInputModel" asp-for="Model" placeholder="Model gir">
+                                <label for="exampleInputModel">vites türü</label>
+                                <input type="text" class="form-control" id="exampleInputModel" asp-for="Transmission" >
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputModel">Model</label>
-                                <input type="text" class="form-control" id="exampleInputModel" asp-for="Model" placeholder="Model gir">
+                                <label for="exampleInputModel">Koltuk sayısı</label>
+                                <input type="number" class="form-control" id="exampleInputModel" asp-for="Seat" >
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            <div class="form-group">
+                                <label for="exampleInputModel">Bagaj sayısı</label>
+                                <input type="number" class="form-control" id="exampleInputModel" asp-for="Luggage" >
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputModel">Yakıt türü</label>
+                                <input type="text" class="form-control" id="exampleInputModel" asp-for="Fuel" >
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputModel">Büyük Kapak Fotoğrafı</label>
+                                <input type="text" class="form-control" id="exampleInputModel" asp-for="BigImageUrl" >
+                            </div>
                             
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Aracı Kaydet</button>
                         </form>
 
                     </div> <!-- end card-body-->
