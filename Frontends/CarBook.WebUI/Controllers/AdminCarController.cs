@@ -72,5 +72,56 @@ namespace CarBook.WebUI.Controllers
         }
 
 
+
+        public async Task<IActionResult> RemoveCar(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"https://localhost:7192/api/Cars?id={id}");
+
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+               return RedirectToAction("Index");
+            }
+
+            return View();
+
+
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateCar(int id)
+        {
+            var client1 = _httpClientFactory.CreateClient();
+            var responseMessage1= await client1.GetAsync("https://localhost:7192/api/Brands");
+            var dataJson1 = await responseMessage1.Content.ReadAsStringAsync();
+            var values1 = JsonConvert.DeserializeObject<List<ResultBrandDto>>(dataJson1);
+
+            List<SelectListItem> brandValues = (from x in values1
+                                                select new SelectListItem
+                                                {
+                                                    Text = x.Name,
+                                                    Value = x.BrandID.ToString()
+                                                }).ToList();
+
+            ViewBag.BrandValues = brandValues;
+
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7192/api/Cars/"+id);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var dataJson = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<UpdateCarDto>(dataJson);
+                return View(values);  
+            }
+
+            return View();
+        }
+
+
+
     }
 }
