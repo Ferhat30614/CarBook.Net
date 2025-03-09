@@ -4,5 +4,49 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-<h1>UpdateAbout</h1>
+
+
+@model UpdateAboutDto
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Hakkımızda Bilgisi Güncelleme</h4>
+                        <p class="card-subtitle mb-4">
+                            About alanına veri güncellemesi aşağıdaki panelden yapabilirsiniz. Tasarımda bozulma olmaması
+                            adına yeni bir About girişi yaptıktan sonra önceki About alanını silin, sadece 1
+                            tane About verisi kalmalıdır.
+                        </p>
+                        <form method="post">
+                            <input type="hidden"  asp-for="aboutID"/>
+                            <div class="form-group">
+                                <label for="exampleInputTitle">Başlık</label>
+                                <input type="text" class="form-control" id="exampleInputTitle" asp-for="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputDescription">Açıklama</label>
+                                <textarea rows="5" class="form-control" asp-for="description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputVideoDescription">Görsel</label>
+                                <input type="text" class="form-control" id="exampleInputVideoDescription" asp-for="imageUrl">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">About Bilgisini Güncelle</button>
+                        </form>
+
+                    </div> <!-- end card-body-->
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
 
