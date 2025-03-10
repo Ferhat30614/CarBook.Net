@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace CarBook.Dto.PricingDtos
 {
-    internal class CreatePricingDto
+    public class CreatePricingDto
     {
+        public string Name { get; set; }
+
     }
 }
