@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Results.StatisticsResults
 {
-    internal class GetBrandCountQueryResult
+    public class GetBrandCountQueryResult
     {
+        public int  BrandCount { get; set; }
     }
 }

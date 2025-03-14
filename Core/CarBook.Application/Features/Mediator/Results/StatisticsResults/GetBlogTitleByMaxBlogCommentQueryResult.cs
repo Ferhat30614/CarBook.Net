@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Results.StatisticsResults
 {
-    internal class GetBlogTitleByMaxBlogCommentQueryResult
+    public class GetBlogTitleByMaxBlogCommentQueryResult
     {
+        public string BlogTitleByMaxBlogComment { get; set; }
     }
 }

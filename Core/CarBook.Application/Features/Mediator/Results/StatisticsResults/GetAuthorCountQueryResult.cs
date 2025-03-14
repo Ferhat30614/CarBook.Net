@@ -8,6 +8,6 @@ namespace CarBook.Application.Features.Mediator.Results.StatisticsResults
 {
     public class GetAuthorCountQueryResult
     {
-        public int MyProperty { get; set; }
+        public int AuthorCount { get; set; }
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Results.StatisticsResults
 {
-    internal class GetCarBrandAndModelByRentPriceDailyMinQueryResult
+    public class GetCarBrandAndModelByRentPriceDailyMinQueryResult
     {
+        public string CarBrandAndModelByRentPriceDailyMin { get; set; }
     }
 }

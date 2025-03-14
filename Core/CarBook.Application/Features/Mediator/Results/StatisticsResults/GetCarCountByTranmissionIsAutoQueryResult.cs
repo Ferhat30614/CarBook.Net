@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Results.StatisticsResults
 {
-    internal class GetCarCountByTranmissionIsAutoQueryResult
+    public class GetCarCountByTranmissionIsAutoQueryResult
     {
+        public int CarCountByTranmissionIsAuto { get; set; }
     }
 }
