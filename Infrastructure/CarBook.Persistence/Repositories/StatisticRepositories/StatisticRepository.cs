@@ -35,7 +35,13 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
 
         public double GetAvgRentPriceForDaily()
         {
-            throw new NotImplementedException();
+            //Select Avg(Amount) from CarPricings where CarPricings.PricingID=(select PricingID from Pricings where Name='Günlük');
+            var total = _context.CarPricings.Where(z=>z.PricingID==3).Sum(x=>x.Amount);
+            var carcaountbypricinıd3 = _context.CarPricings.Where(z => z.PricingID == 3).Count();
+
+            var sonuc = total / carcaountbypricinıd3;
+            return sonuc;
+
         }
 
         public double GetAvgRentPriceForMonthly()
