@@ -9,14 +9,14 @@ namespace CarBook.Application.Interfaces.StatisticInterfaces
     public interface IStatisticRepository
     {
         int GetCarCount();
-        int GetLocationCount();
+        int GetLocationCount();  
         int GetAuthorCount();
         int GetBlogCount();
         int GetBrandCount();
         decimal GetAvgRentPriceForDaily();
         decimal GetAvgRentPriceForWeekly();
         decimal GetAvgRentPriceForMonthly();
-        int GetCarCountByTranmissionIsAuto();
+        int GetCarCountByTranmissionIsAuto(); 
         string GetBrandNameByMaxCar();
         string GetBlogTitleByMaxBlogComment();
         int GetCarCountByKmSmallerThen1000();
