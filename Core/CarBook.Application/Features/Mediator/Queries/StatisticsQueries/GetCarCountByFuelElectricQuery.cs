@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Results.StatisticsResults
 {
-    public class GetAuthorCountQueryResult
+    internal class GetCarCountByFuelElectricQuery
     {
-        public int MyProperty { get; set; }
     }
 }

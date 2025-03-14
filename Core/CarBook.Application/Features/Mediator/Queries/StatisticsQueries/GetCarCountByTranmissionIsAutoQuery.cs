@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Application.Features.Mediator.Results.StatisticsResults
+namespace CarBook.Application.Features.Mediator.Queries.StatisticsQueries
 {
-    public class GetBrandNameByMaxCarQueryResult
+    internal class GetCarCountByTranmissionIsAutoQuery
     {
     }
 }
