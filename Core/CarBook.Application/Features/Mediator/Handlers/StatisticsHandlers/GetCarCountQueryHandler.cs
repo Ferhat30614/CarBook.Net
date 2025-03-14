@@ -19,9 +19,13 @@ namespace CarBook.Application.Features.Mediator.Handlers.StatisticsHandlers
             _carRepository = carRepository;
         }
 
-        public Task<GetCarCountQueryResult> Handle(GetCarCountQuery request, CancellationToken cancellationToken)
+        public async Task<GetCarCountQueryResult> Handle(GetCarCountQuery request, CancellationToken cancellationToken)
         {
-            var values=_carRepository.
+            var values = _carRepository.GetCarCount();
+            return new GetCarCountQueryResult 
+            {
+                CarCount = values 
+            };
         }
     }
 }
