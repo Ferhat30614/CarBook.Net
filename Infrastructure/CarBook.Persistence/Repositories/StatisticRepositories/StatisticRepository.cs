@@ -17,12 +17,12 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
             _context = context;
         }
 
-        public string BlogTitleByMaxBlogComment()
+        public string GetBlogTitleByMaxBlogComment()
         {
             throw new NotImplementedException();
         }
 
-        public string BrandNameByMaxCar()
+        public string GetBrandNameByMaxCar()
         {
             throw new NotImplementedException();
         }
@@ -33,25 +33,31 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
             return values;
         }
 
-        public double GetAvgRentPriceForDaily()
+        public decimal GetAvgRentPriceForDaily()
         {
             //Select Avg(Amount) from CarPricings where CarPricings.PricingID=(select PricingID from Pricings where Name='Günlük');
-            var total = _context.CarPricings.Where(z=>z.PricingID==3).Sum(x=>x.Amount);
-            var carcaountbypricinıd3 = _context.CarPricings.Where(z => z.PricingID == 3).Count();
 
-            var sonuc = total / carcaountbypricinıd3;
-            return sonuc;
+            int id = _context.Pricings.Where(z => z.Name == "Günlük").Select(f => f.PricingID).FirstOrDefault();
+            var values = _context.CarPricings.Where(x => x.PricingID == id).Average(y => y.Amount);
+
+            return values;
 
         }
 
-        public double GetAvgRentPriceForMonthly()
+        public decimal GetAvgRentPriceForMonthly()
         {
-            throw new NotImplementedException();
+            int id = _context.Pricings.Where(z => z.Name == "Aylık").Select(f => f.PricingID).FirstOrDefault();
+            var values = _context.CarPricings.Where(x => x.PricingID == id).Average(y => y.Amount);
+
+            return values;
         }
 
-        public double GetAvgRentPriceForWeekly()
+        public decimal GetAvgRentPriceForWeekly()
         {
-            throw new NotImplementedException();
+            int id = _context.Pricings.Where(z => z.Name == "Haftalık").Select(f => f.PricingID).FirstOrDefault();
+            var values = _context.CarPricings.Where(x => x.PricingID == id).Average(y => y.Amount);
+
+            return values;
         }
 
         public int GetBlogCount()
@@ -87,27 +93,30 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
 
         public int GetCarCountByFuelElectric()
         {
-            throw new NotImplementedException();
+            var values = _context.Cars.Where(x => x.Fuel == "Elektrik" ).Count();
+            return values;
         }
 
         public int GetCarCountByFuelGasolineOrDiesel()
         {
-            throw new NotImplementedException();
+            var values = _context.Cars.Where(x => x.Fuel == "Benzin" || x.Fuel == "Dizel").Count();
+            return values;  
         }
 
         public int GetCarCountByKmSmallerThen1000()
         {
-            throw new NotImplementedException();
+            var values = _context.Cars.Where(x => x.Km <=1000).Count();
+            return values;
         }
 
         public int GetCarCountByTranmissionIsAuto()
         {
-            throw new NotImplementedException();
+            var values = _context.Cars.Where(x => x.Transmission == "Otomatik").Count();
+            return values;  
         }
 
         public int GetLocationCount()
         {
-
             var values = _context.Locations.Count();
             return values;
         }

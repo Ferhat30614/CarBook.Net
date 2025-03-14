@@ -13,12 +13,12 @@ namespace CarBook.Application.Interfaces.StatisticInterfaces
         int GetAuthorCount();
         int GetBlogCount();
         int GetBrandCount();
-        double GetAvgRentPriceForDaily();
-        double GetAvgRentPriceForWeekly();
-        double GetAvgRentPriceForMonthly();
+        decimal GetAvgRentPriceForDaily();
+        decimal GetAvgRentPriceForWeekly();
+        decimal GetAvgRentPriceForMonthly();
         int GetCarCountByTranmissionIsAuto();
-        string BrandNameByMaxCar();
-        string BlogTitleByMaxBlogComment();
+        string GetBrandNameByMaxCar();
+        string GetBlogTitleByMaxBlogComment();
         int GetCarCountByKmSmallerThen1000();
         int GetCarCountByFuelGasolineOrDiesel();
         int GetCarCountByFuelElectric();
