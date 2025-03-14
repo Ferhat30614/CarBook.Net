@@ -8,6 +8,7 @@ namespace CarBook.Application.Interfaces.StatisticInterfaces
 {
     public interface IStatisticRepository
     {
+        int GetCarCount();
         int GetLocationCount();
         int GetAuthorCount();
         int GetBlogCount();
