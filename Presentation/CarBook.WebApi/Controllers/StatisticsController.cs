@@ -1,4 +1,5 @@
 ﻿using CarBook.Application.Features.Mediator.Queries.StatisticsQueries;
+using CarBook.Application.Features.Mediator.Results.StatisticsResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -85,10 +86,48 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
 
         }
+
         [HttpGet("GetBlogTitleByMaxBlogComment")]
         public async Task<IActionResult> GetBlogTitleByMaxBlogComment()
         {
             var values = await _mediator.Send(new GetBlogTitleByMaxBlogCommentQuery());
+            return Ok(values);
+
+        }
+
+        [HttpGet("GetCarCountByKmSmallerThen1000")]
+        public async Task<IActionResult> GetCarCountByKmSmallerThen1000()
+        {
+            var values = await _mediator.Send(new GetCarCountByKmSmallerThen1000Query());
+            return Ok(values);
+
+        }
+        [HttpGet("GetCarCountByFuelGasolineOrDiesel")]
+        public async Task<IActionResult> GetCarCountByFuelGasolineOrDiesel()
+        {
+            var values = await _mediator.Send(new GetCarCountByFuelGasolineOrDieselQuery());
+            return Ok(values);
+
+        }
+        [HttpGet("GetCarCountByFuelElectric")]
+        public async Task<IActionResult> GetCarCountByFuelElectric()
+        {
+            var values = await _mediator.Send(new GetCarCountByFuelElectricQuery());
+            return Ok(values);
+
+        }
+        
+        [HttpGet("GetCarBrandAndModelByRentPriceDailyMax")]
+        public async Task<IActionResult> GetCarBrandAndModelByRentPriceDailyMax()
+        {
+            var values = await _mediator.Send(new GetCarBrandAndModelByRentPriceDailyMaxQuery());
+            return Ok(values);
+
+        }
+        [HttpGet("GetCarBrandAndModelByRentPriceDailyMin")]
+        public async Task<IActionResult> GetCarBrandAndModelByRentPriceDailyMin()
+        {
+            var values = await _mediator.Send(new GetCarBrandAndModelByRentPriceDailyMinQuery());
             return Ok(values);
 
         }
