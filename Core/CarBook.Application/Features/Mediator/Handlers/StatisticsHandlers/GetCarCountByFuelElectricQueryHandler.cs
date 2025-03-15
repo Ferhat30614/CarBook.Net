@@ -10,24 +10,22 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Handlers.StatisticsHandlers
 {
-    public class GetBrandNameByMaxCarQueryHandler : IRequestHandler<GetBrandNameByMaxCarQuery, GetBrandNameByMaxCarQueryResult>
+    public class GetCarCountByFuelElectricQueryHandler : IRequestHandler<GetCarCountByFuelElectricQuery, GetCarCountByFuelElectricQueryResult>
     {
         private readonly IStatisticRepository _repository;
 
-        public GetBrandNameByMaxCarQueryHandler(IStatisticRepository statisticRepository)
+        public GetCarCountByFuelElectricQueryHandler(IStatisticRepository statisticRepository)
         {
             _repository = statisticRepository;
         }
 
-        public async Task<GetBrandNameByMaxCarQueryResult> Handle(GetBrandNameByMaxCarQuery request, CancellationToken cancellationToken)
+        public async Task<GetCarCountByFuelElectricQueryResult> Handle(GetCarCountByFuelElectricQuery request, CancellationToken cancellationToken)
         {
-            var values = _repository.GetBrandNameByMaxCar();
-            return new GetBrandNameByMaxCarQueryResult
+            var values = _repository.GetCarCountByFuelElectric();
+            return new GetCarCountByFuelElectricQueryResult
             {
-                BrandNameByMaxCar = values
+                CarCountByFuelElectric = values
             };
         }
     }
-    
-    
 }
