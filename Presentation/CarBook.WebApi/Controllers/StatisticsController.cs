@@ -49,5 +49,49 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
 
         }
+
+        [HttpGet("GetAvgRentPriceForDaily")]
+        public async Task<IActionResult> GetAvgRentPriceForDaily()
+        {
+            var values = await _mediator.Send(new GetAvgRentPriceForDailyQuery());
+            return Ok(values);
+
+        }
+        [HttpGet("GetAvgRentPriceForWeekly")]
+        public async Task<IActionResult> GetAvgRentPriceForWeekly()
+        {
+            var values = await _mediator.Send(new GetAvgRentPriceForWeeklyQuery());
+            return Ok(values);
+
+        }
+        [HttpGet("GetAvgRentPriceForMonthly")]
+        public async Task<IActionResult> GetAvgRentPriceForMonthly()
+        {
+            var values = await _mediator.Send(new GetAvgRentPriceForMonthlyQuery());
+            return Ok(values);
+
+        }
+        [HttpGet("GetCarCountByTranmissionIsAuto")]
+        public async Task<IActionResult> GetCarCountByTranmissionIsAuto()
+        {
+            var values = await _mediator.Send(new GetCarCountByTranmissionIsAutoQuery());
+            return Ok(values);
+
+        }
+        [HttpGet("GetBrandNameByMaxCar")]
+        public async Task<IActionResult> GetBrandNameByMaxCar()
+        {
+            var values = await _mediator.Send(new GetBrandNameByMaxCarQuery());
+            return Ok(values);
+
+        }
+        [HttpGet("GetBlogTitleByMaxBlogComment")]
+        public async Task<IActionResult> GetBlogTitleByMaxBlogComment()
+        {
+            var values = await _mediator.Send(new GetBlogTitleByMaxBlogCommentQuery());
+            return Ok(values);
+
+        }
+
     }
 }
