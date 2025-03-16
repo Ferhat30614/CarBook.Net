@@ -1,5 +1,6 @@
 ﻿using CarBook.Application.Interfaces.StatisticInterfaces;
 using CarBook.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,12 +77,20 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
 
         public string GetCarBrandAndModelByRentPriceDailyMax()
         {
-            throw new NotImplementedException();
+            int pricingID = _context.Pricings.Where(c => c.Name == "Günlük").Select(d => d.PricingID).FirstOrDefault();
+            decimal amount = _context.CarPricings.Where(a => a.PricingID == pricingID).Max(b => b.Amount);
+            int carId = _context.CarPricings.Where(e => e.Amount == amount).Select(f => f.CarID).FirstOrDefault();
+            string brandModel = _context.Cars.Include(g => g.Brand).Where(h => h.CarID == carId).Select(z => z.Brand.Name + " " + z.Model).FirstOrDefault();
+            return brandModel;
         }
 
         public string GetCarBrandAndModelByRentPriceDailyMin()
         {
-            throw new NotImplementedException();
+            int pricingID = _context.Pricings.Where(c => c.Name == "Günlük").Select(d => d.PricingID).FirstOrDefault();
+            decimal amount = _context.CarPricings.Where(a => a.PricingID == pricingID).Min(b => b.Amount);
+            int carId = _context.CarPricings.Where(e => e.Amount == amount).Select(f => f.CarID).FirstOrDefault();
+            string brandModel = _context.Cars.Include(g => g.Brand).Where(h => h.CarID == carId).Select(z => z.Brand.Name + " " + z.Model).FirstOrDefault();
+            return brandModel;
         }
 
         public int GetCarCount()
