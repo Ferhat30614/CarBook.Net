@@ -1,4 +1,5 @@
 ﻿using CarBook.Application.Interfaces.StatisticInterfaces;
+using CarBook.Domain.Entities;
 using CarBook.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,7 +26,18 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
 
         public string GetBrandNameByMaxCar()
         {
-            throw new NotImplementedException();
+            //select top (1 ) Brands.Name,COUNT(*) as 'ToplamArac' from Cars inner join Brands on Brands.BrandID = Cars.BrandID 
+            //group by Brands.Name order by toplamarac desc
+
+            var values = _context.Cars.GroupBy(a => a.BrandID).Select(b => new
+            {
+                BrandId = b.Key,
+                ferhat = b.Count()
+            }).OrderByDescending(c=>c.ferhat).FirstOrDefault();
+
+            string brandName = _context.Brands.Where(d => d.BrandID == values.BrandId).Select(e=>e.Name).FirstOrDefault();  
+
+            return brandName;
         }
 
         public int GetAuthorCount()
