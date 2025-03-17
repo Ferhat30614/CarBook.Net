@@ -21,7 +21,16 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
 
         public string GetBlogTitleByMaxBlogComment()
         {
-            throw new NotImplementedException();
+            // select  top (1) BlogID,count(*) from Comments group by BlogID order by Count(*) desc
+
+            var values = _context.Comments.GroupBy(a => a.BlogID).Select(b => new
+            {
+                BlogID=b.Key,   
+                Count=b.Count()     
+            }).OrderByDescending(c => c.Count).FirstOrDefault();
+
+            string blogTitle = _context.Blogs.Where(d => d.BlogID == values.BlogID).Select(e => e.Title).FirstOrDefault();
+            return blogTitle;
         }
 
         public string GetBrandNameByMaxCar()
@@ -32,8 +41,8 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
             var values = _context.Cars.GroupBy(a => a.BrandID).Select(b => new
             {
                 BrandId = b.Key,
-                ferhat = b.Count()
-            }).OrderByDescending(c=>c.ferhat).FirstOrDefault();
+                Count = b.Count()
+            }).OrderByDescending(c=>c.Count).FirstOrDefault();
 
             string brandName = _context.Brands.Where(d => d.BrandID == values.BrandId).Select(e=>e.Name).FirstOrDefault();  
 
