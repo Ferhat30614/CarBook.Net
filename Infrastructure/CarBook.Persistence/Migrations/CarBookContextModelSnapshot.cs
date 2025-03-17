@@ -377,7 +377,7 @@ namespace CarBook.Persistence.Migrations
 
                     b.HasKey("CustomerID");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Entities.Feature", b =>
@@ -500,31 +500,31 @@ namespace CarBook.Persistence.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
-                    b.Property<int>("DropOffDate")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DropOffDate")
+                        .HasColumnType("Date");
 
                     b.Property<string>("DropOffDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DropOffLocation")
+                    b.Property<int>("DropOffLocationID")
                         .HasColumnType("int");
 
-                    b.Property<int>("DropOffTime")
-                        .HasColumnType("int");
+                    b.Property<TimeSpan>("DropOffTime")
+                        .HasColumnType("Time");
 
-                    b.Property<int>("PickUpDate")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("PickUpDate")
+                        .HasColumnType("Date");
 
                     b.Property<string>("PickUpDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PickUpLocation")
+                    b.Property<int>("PickUpLocationID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PickUpTime")
-                        .HasColumnType("int");
+                    b.Property<TimeSpan>("PickUpTime")
+                        .HasColumnType("Time");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
@@ -535,7 +535,7 @@ namespace CarBook.Persistence.Migrations
 
                     b.HasIndex("CustomerID");
 
-                    b.ToTable("RentACarProcess");
+                    b.ToTable("RentACarProcesses");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Entities.Service", b =>
