@@ -15,7 +15,7 @@ namespace CarBook.WebUI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-
+           
             ViewBag.v1 = "Bloglar";
             ViewBag.v2 = "Yazarlarımızın Blogları";
             var client = _httpClientFactory.CreateClient();
