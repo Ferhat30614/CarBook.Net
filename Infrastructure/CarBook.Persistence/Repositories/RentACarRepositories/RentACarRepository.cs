@@ -1,6 +1,7 @@
 ﻿using CarBook.Application.Interfaces.RentACarIntefaces;
 using CarBook.Domain.Entities;
 using CarBook.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,11 @@ namespace CarBook.Persistence.Repositories.RentACarRepositories
             _context = context;
         }
 
-        public List<RentACar> GetByFilterAsync(Expression<Func<RentACar, bool>> filter)
+        public async Task<List<RentACar>> GetByFilterAsync(Expression<Func<RentACar, bool>> filter)
         {
-            var values = _context.RentACars.Where(filter);
-            return values.ToList();
+            var values = await _context.RentACars.Where(filter).Include(a=>a.Car).ThenInclude(b=>b.Brand).ToListAsync();
+            return values;            
         }
+
     }
 }

@@ -15,7 +15,7 @@ namespace CarBook.WebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-        public async Task<IActionResult> Index(FilterRentACarDto  filterRentACarDto)
+        public async Task<IActionResult> Index(int id)
         {
             var timepick = TempData["time_pick"];
             var timeoff = TempData["time_off"];
@@ -29,14 +29,19 @@ namespace CarBook.WebUI.Controllers
             ViewBag.bookoffdate = bookoffdate;
             ViewBag.LocationID = LocationID;
 
-            filterRentACarDto.Available = true;
-            filterRentACarDto.LocationID = LocationID;
+            id = int.Parse(LocationID.ToString());            
 
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(filterRentACarDto);
-            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7192/api/RentACars", content);
+            var responseMessage = await client.GetAsync($"https://localhost:7192/api/RentACars?LocationID={id}&Available=true");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var dataJson = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<FilterRentACarDto>>(dataJson);
+                return View(values);
+            }
             return View();
+
+
         }
     }
 }
