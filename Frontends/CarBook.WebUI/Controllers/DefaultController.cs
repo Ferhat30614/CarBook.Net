@@ -39,10 +39,7 @@ namespace CarBook.WebUI.Controllers
             return View();
         }
 
-
-
         [HttpPost]
-        
         public  IActionResult Index(string time_pick,string time_off,string book_off_date,string book_pick_date,string  LocationID)
         {
             TempData["time_pick"] = time_pick;
