@@ -17,16 +17,9 @@ namespace CarBook.WebUI.Controllers
         }
         public async Task<IActionResult> Index(int id)
         {
-            var timepick = TempData["time_pick"];
-            var timeoff = TempData["time_off"];
-            var bookpickdate = TempData["book_pick_date"];
-            var bookoffdate = TempData["book_off_date"];
             var LocationID = TempData["LocationID"];
            
-            ViewBag.timepick = timepick;
-            ViewBag.timeoff = timeoff;
-            ViewBag.bookpickdate = bookpickdate;
-            ViewBag.bookoffdate = bookoffdate;
+           
             ViewBag.LocationID = LocationID;
 
             id = int.Parse(LocationID.ToString());            
