@@ -1,5 +1,6 @@
 ﻿using CarBook.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,20 @@ namespace CarBook.Persistence.Context
         public DbSet<Customer> Customers { get; set; }
         public DbSet<RentACarProcess> RentACarProcesses { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-      
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Reservation>()
+                 .HasOne(x => x.PickUpLocation)
+                 .WithMany(y => y.PickUpReservation)
+                 .HasForeignKey(z => z.PickUpLocationID);
+
+            modelBuilder.Entity<Reservation>()
+                .HasOne(a => a.DropOffLocation)
+                .WithMany(b => b.DropOffReservation)
+                .HasForeignKey(c => c.DropOffLocationID);
+        }
+
 
     }
 }

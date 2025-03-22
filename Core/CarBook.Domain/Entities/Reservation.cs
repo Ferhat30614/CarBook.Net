@@ -13,8 +13,11 @@ namespace CarBook.Domain.Entities
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public int CarID { get; set; }
-       // public string PickUpLocation{ get; set; }
+        public int CarID { get; set; } //Burda mesela carıdyi almak için illada car nesenesine gerek yomuş
+        public int PickUpLocationID{ get; set; }
+        public int DropOffLocationID{ get; set; }
+        public Location PickUpLocation { get; set; }
+        public Location DropOffLocation{ get; set; }
         public int Age { get; set; }
         public int DriverLicenseYear { get; set; }
         public string? Description { get; set; }
