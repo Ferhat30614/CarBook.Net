@@ -47,12 +47,14 @@ namespace CarBook.Persistence.Context
             modelBuilder.Entity<Reservation>()
                  .HasOne(x => x.PickUpLocation)
                  .WithMany(y => y.PickUpReservation)
-                 .HasForeignKey(z => z.PickUpLocationID);
+                 .HasForeignKey(z => z.PickUpLocationID)
+                 .OnDelete(DeleteBehavior.ClientSetNull);                     
 
             modelBuilder.Entity<Reservation>()
                 .HasOne(a => a.DropOffLocation)
                 .WithMany(b => b.DropOffReservation)
-                .HasForeignKey(c => c.DropOffLocationID);
+                .HasForeignKey(c => c.DropOffLocationID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
 
 
