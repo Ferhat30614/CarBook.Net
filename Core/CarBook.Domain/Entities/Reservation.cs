@@ -13,7 +13,8 @@ namespace CarBook.Domain.Entities
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public int CarID { get; set; } //Burda mesela carıdyi almak için illada car nesenesine gerek yomuş
+        public int CarID { get; set; } //Burda mesela carıdyi almak için illada car nesenesine gerek yomuş (bu bu şekilde değilmiş gene car propunu eklemek gerekiyormuş fk yapacaksak)
+        public Car Car { get; set; } 
         public int PickUpLocationID{ get; set; }
         public int DropOffLocationID{ get; set; }
         public Location PickUpLocation { get; set; }
