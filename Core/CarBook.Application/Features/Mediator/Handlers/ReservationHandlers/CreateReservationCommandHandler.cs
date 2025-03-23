@@ -32,7 +32,8 @@ namespace CarBook.Application.Features.Mediator.Handlers.ReservationHandlers
                 DropOffLocationID = request.DropOffLocationID,
                 Age = request.Age,
                 DriverLicenseYear = request.DriverLicenseYear,
-                Description = request.Description
+                Description = request.Description,
+                Status="Rezervasyon Alındı"                
             });
        
         }
