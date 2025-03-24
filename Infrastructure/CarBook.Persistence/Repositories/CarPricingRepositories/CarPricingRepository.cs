@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,36 +35,36 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
 
             using (var command=_context.Database.GetDbConnection().CreateCommand()){
 
-                command.CommandText = "Select * From (Select Cars.Model,PricingID,Amount From CarPricings inner join Cars " +
-                    "on Cars.CarID=CarPricings.CarID) as SourceTable Pivot(Sum(Amount) for PricingID In ([3],[4],[9])) as PivotTable";
+                command.CommandText = "Select * From (Select Brands.Name,Cars.Model,CoverImageUrl,PricingID,Amount From CarPricings inner join " +
+                    "Cars on Cars.CarID=CarPricings.CarID\r\ninner join Brands on Brands.BrandID=Cars.BrandID) as SourceTable Pivot(Sum(Amount)" +
+                    " for PricingID In ([3],[4],[9])) as PivotTable";
                 command.CommandType = System.Data.CommandType.Text;
                 _context.Database.OpenConnection();
                 using (var reader=command.ExecuteReader())
                 {
                     while (reader.Read())//okuma işlemi devam ediyosa
                     {
-                        CarPricingViewModel carPricingViewModel = new CarPricingViewModel();
-                        carPricingViewModel.Model = reader.GetString(0);
-
-                        Enumerable.Range(1, 3).ToList().ForEach(x =>
+                        CarPricingViewModel carPricingViewModel = new CarPricingViewModel()
                         {
-                            if (DBNull.Value.Equals(reader[x]))
-                            {
-                                carPricingViewModel.Amounts.Add(0);     
-                            }
-                            else
-                            {
-                                carPricingViewModel.Amounts.Add(reader.GetDecimal(x));
-                            }                           
-                        });
-                        values.Add(carPricingViewModel);
+                            Model = reader["Model"].ToString(),
+                            BrandName = reader["Name"].ToString(),
+                            CoverImageUrl = reader["CoverImageUrl"].ToString(),
+                            Amounts = new List<decimal> {
 
+                                reader[3]!=DBNull.Value ? Convert.ToDecimal(reader[3]) : 0,
+                                reader[4]!=DBNull.Value ? Convert.ToDecimal(reader[4]) : 0,
+                                reader[5]!=DBNull.Value ? Convert.ToDecimal(reader[5]) : 0,
+
+                                    
+                            }
+                        };
+                        values.Add(carPricingViewModel);        
                     }
                     _context.Database.CloseConnection();
                     return values;
-                }                
-            }           
-
+                }
+            }
         }
     }
 }
+
