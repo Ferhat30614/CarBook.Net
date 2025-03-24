@@ -1,4 +1,5 @@
 ﻿using CarBook.Application.Interfaces.CarPricingInterfaces;
+using CarBook.Application.ViewModels;
 using CarBook.Domain.Entities;
 using CarBook.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,22 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
                 Include(z => z.Pricing).Where(c=>c.PricingID==3).ToList();   
 
             return values;  
+        }
+
+        public List<CarPricingViewModel> GetCarPricingWithTimePeriod()
+        {
+            List<CarPricingViewModel> values = new List<CarPricingViewModel>(); 
+
+
+
+
+
+
+
+
+
+            return values;  
+
         }
     }
 }
