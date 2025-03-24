@@ -30,17 +30,42 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
 
         public List<CarPricingViewModel> GetCarPricingWithTimePeriod()
         {
-            List<CarPricingViewModel> values = new List<CarPricingViewModel>(); 
+            List<CarPricingViewModel> values = new List<CarPricingViewModel>();
+
+            using (var command=_context.Database.GetDbConnection().CreateCommand()){
+
+                command.CommandText = "Select * From (Select CarID,PricingID,Amount From CarPricings) " +
+                    "as SourceTable Pivot(Sum(Amount) for PricingID In ([2],[3],[4],[9])) as PivotTable";
+                command.CommandType = System.Data.CommandType.Text;
+                _context.Database.OpenConnection();
+                using (var reader=command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+
+
+                    }
+
+
+
+                }
+                
+
+
+
+               
+            }
+
+
+
+
+            return values;
 
 
 
 
 
-
-
-
-
-            return values;  
 
         }
     }
