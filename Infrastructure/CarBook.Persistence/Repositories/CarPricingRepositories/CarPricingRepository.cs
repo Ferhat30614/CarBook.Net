@@ -34,8 +34,8 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
 
             using (var command=_context.Database.GetDbConnection().CreateCommand()){
 
-                command.CommandText = "Select * From (Select CarID,PricingID,Amount From CarPricings) as SourceTable" +
-                    " Pivot(Sum(Amount) for PricingID In ([3],[4],[9])) as PivotTable";
+                command.CommandText = "Select * From (Select Cars.Model,PricingID,Amount From CarPricings inner join Cars " +
+                    "on Cars.CarID=CarPricings.CarID) as SourceTable Pivot(Sum(Amount) for PricingID In ([3],[4],[9])) as PivotTable";
                 command.CommandType = System.Data.CommandType.Text;
                 _context.Database.OpenConnection();
                 using (var reader=command.ExecuteReader())
@@ -43,6 +43,7 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
                     while (reader.Read())//okuma işlemi devam ediyosa
                     {
                         CarPricingViewModel carPricingViewModel = new CarPricingViewModel();
+                        carPricingViewModel.Model = reader.GetString(0);
 
                         Enumerable.Range(1, 3).ToList().ForEach(x =>
                         {
@@ -56,9 +57,6 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
                             }                           
                         });
                         values.Add(carPricingViewModel);
-
-
-
 
                     }
                     _context.Database.CloseConnection();
