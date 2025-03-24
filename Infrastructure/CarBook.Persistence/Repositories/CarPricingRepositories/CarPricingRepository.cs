@@ -53,14 +53,15 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
                             else
                             {
                                 carPricingViewModel.Amounts.Add(reader.GetDecimal(x));
-                            }
+                            }                           
                         });
-
-                        _context.Database.CloseConnection();
                         values.Add(carPricingViewModel);
-                       
+
+
+
 
                     }
+                    _context.Database.CloseConnection();
                     return values;
                 }                
             }           
