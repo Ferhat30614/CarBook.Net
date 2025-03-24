@@ -51,9 +51,9 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
                             CoverImageUrl = reader["CoverImageUrl"].ToString(),
                             Amounts = new List<decimal> {
 
-                                reader[3]!=DBNull.Value ? Convert.ToDecimal(reader[3]) : 0,
-                                reader[4]!=DBNull.Value ? Convert.ToDecimal(reader[4]) : 0,
-                                reader[5]!=DBNull.Value ? Convert.ToDecimal(reader[5]) : 0,
+                                reader[3]!=DBNull.Value ? Convert.ToDecimal(reader["3"]) : 0,
+                                reader[4]!=DBNull.Value ? Convert.ToDecimal(reader["4"]) : 0,
+                                reader[5]!=DBNull.Value ? Convert.ToDecimal(reader["9"]) : 0,
 
                                     
                             }
