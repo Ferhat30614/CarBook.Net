@@ -1,21 +1,18 @@
-﻿@model CreateCommentDto
-
-<div  class="comment-form-wrap pt-5">
+﻿
+<div class="comment-form-wrap pt-5">
     <h3 class="mb-5">Bir Yorum Bırakın</h3>
-    <form method="post"  class="p-5 bg-light">
+    <form method="post" asp-action="AddComment" asp-controller="Blog" class="p-5 bg-light">
         <div class="form-group">
             <label for="name">Adınız Soyadınız *</label>
-            <input type="text" Name="Name" class="form-control" id="name">
+            <input type="text" name="Name" class="form-control" id="name">
         </div>
         <div class="form-group">
             <label for="email">Blog ID *</label>
-            <input type="email" class="form-control" Name="BlogID" id="email">
+            <input type="text" class="form-control" name="BlogID" id="email">
         </div>
-       
-
         <div class="form-group">
             <label for="message">Yorumunuz *</label>
-            <textarea name="" id="message" Name="Description" cols="30" rows="10" class="form-control"></textarea>
+            <textarea id="message" name="Description" cols="30" rows="10" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <input type="submit" value="Yorumu Gönder" class="btn py-3 px-4 btn-primary">
