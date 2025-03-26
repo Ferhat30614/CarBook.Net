@@ -38,5 +38,22 @@ namespace CarBook.WebUI.Controllers
             
             return View();
         }
+
+
+        [HttpGet]
+        public PartialViewResult AddComment() 
+        {
+            return PartialView();
+        }
+
+
+        [HttpPost]
+        public IActionResult AddComment(string a)
+        {
+            return View();
+        }
+
+
+
     }
 }
