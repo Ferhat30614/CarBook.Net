@@ -1,7 +1,10 @@
 ﻿using CarBook.Dto.BlogDtos;
 using CarBook.Dto.CarPricingDtos;
+using CarBook.Dto.CommentDtos;
+using CarBook.Dto.ContactDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace CarBook.WebUI.Controllers
 {
@@ -48,12 +51,19 @@ namespace CarBook.WebUI.Controllers
 
 
         [HttpPost]
-        public IActionResult AddComment(string a)
+        public async Task<IActionResult> AddComment(CreateCommentDto createCommentDto)
         {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createCommentDto);
+            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7192/api/Comments/CreateComment", content);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                RedirectToAction("Index", "Default");
+
+            }
             return View();
+
         }
-
-
-
     }
 }

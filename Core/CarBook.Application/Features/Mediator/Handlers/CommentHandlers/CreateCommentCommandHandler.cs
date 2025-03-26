@@ -24,7 +24,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.CommentHandlers
             await _commentRepository.CreateAsync(new Comment
             {
                 Name=request.Name,
-                CreatedDate=request.CreatedDate,
+                CreatedDate=DateTime.Parse(DateTime.Now.ToShortDateString()),
                 BlogID=request.BlogID,  
                 Description=request.Description
             });
