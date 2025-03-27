@@ -16,6 +16,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+        [HttpGet]
         [Route("Index/{id}")]
         public async Task<IActionResult> Index(int id)
         {
@@ -28,6 +29,30 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
                 return View(values);
             }
             return View();
+        }
+
+        [HttpPost]
+        [Route("Index/{id}")]
+        public async Task<IActionResult> Index(List<ResultCarFeatureByCarIdDto> resultCarFeatureByCarIdDto)
+        {
+            foreach (var item in resultCarFeatureByCarIdDto) {
+
+
+                if (item.Available == true)
+                {
+                    var client = _httpClientFactory.CreateClient();
+                    var responseMessage = await client.GetAsync("https://localhost:7192/api/CarFeatures/CarFeatureAvailableChangeToTrue?id=" + item.CarFeatureID);
+                }
+                else
+                {
+                    var client = _httpClientFactory.CreateClient();
+                    var responseMessage = await client.GetAsync("https://localhost:7192/api/CarFeatures/CarFeatureAvailableChangeToFalse?id=" + item.CarFeatureID);
+
+                }
+            }
+
+            return RedirectToAction("Index", "AdminCar");
+
         }
     }
 }
