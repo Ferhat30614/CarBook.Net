@@ -7,8 +7,11 @@
             <input type="text" name="Name" class="form-control" id="name">
         </div>
         <div class="form-group">
-            <label for="email">Blog ID *</label>
-            <input type="text" class="form-control" name="BlogID" id="email">
+            <label for="email">Email Adresiniz *</label>
+            <input type="email" name="Email" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control" value="@ViewBag.BlogId" name="BlogID" id="BlogID">
         </div>
         <div class="form-group">
             <label for="message">Yorumunuz *</label>

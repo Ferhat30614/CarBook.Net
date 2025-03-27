@@ -44,8 +44,9 @@ namespace CarBook.WebUI.Controllers
 
 
         [HttpGet]
-        public PartialViewResult AddComment() 
+        public PartialViewResult AddComment(int id) 
         {
+            ViewBag.BlogId = id;
             return PartialView();
         }
 
