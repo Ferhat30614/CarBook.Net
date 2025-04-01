@@ -41,5 +41,12 @@ namespace CarBook.WebApi.Controllers
             return Ok("Başarıyla güncellendi");
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCarFeatureByCar(CreateCarFeatureByCarCommand createCarFeatureByCarCommand)
+        {
+            var values = _mediator.Send(createCarFeatureByCarCommand);
+            return Ok("Başarıyla Arabaya Göre Özellik  Eklendi");
+        }
     }
 }
