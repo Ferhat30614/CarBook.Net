@@ -28,10 +28,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.ReviewHandlers
                 Comment = request.Comment,  
                 RaytingValue=request.RaytingValue,  
                 ReviewDate=DateTime.Now,
-                CarID = request.CarID,  
-
-
-
+                CarID = request.CarID,
             });
         }
     }
