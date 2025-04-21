@@ -20,7 +20,7 @@ namespace CarBook.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> BlogList()
         {
-            var values = await _mediator.Send(new GetBlogQuery());
+            var values =  _mediator.Send(new GetBlogQuery());
             return Ok(values);
 
         }
