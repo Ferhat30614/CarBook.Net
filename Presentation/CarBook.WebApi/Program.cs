@@ -29,9 +29,26 @@ using CarBook.Persistence.Repositories.ReviewRepositories;
 using CarBook.Persistence.Repositories.StatisticRepositories;
 using CarBook.Persistence.Repositories.TagCloudRepositories;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.RequireHttpsMetadata = false;
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidAudience = "https://localhost",
+        ValidIssuer= "https://localhost",
+        ClockSkew=TimeSpan.Zero,
+        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("carbookcarbook01")),
+        ValidateLifetime=true,
+        ValidateIssuerSigningKey=true
+    };
+});
 
 // Add services to the container.
 builder.Services.AddScoped<CarBookContext>();  //contexti ekledim
@@ -46,6 +63,7 @@ builder.Services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepositor
 builder.Services.AddScoped(typeof(ICarFeatureRepository), typeof(CarFeatureRepository));
 builder.Services.AddScoped(typeof(ICarDescriptionRepository), typeof(CarDescriptionRepository));
 builder.Services.AddScoped(typeof(IReviewRepository), typeof(ReviewRepository));
+
 
 
 builder.Services.AddScoped<CreateAboutCommandHandler>();//CQRS için configureler 
