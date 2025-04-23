@@ -16,6 +16,7 @@ using CarBook.Application.Interfaces.ReviewInterfaces;
 using CarBook.Application.Interfaces.StatisticInterfaces;
 using CarBook.Application.Interfaces.TagCloudInterfaces;
 using CarBook.Application.Service;
+using CarBook.Application.Tools;
 using CarBook.Persistence.Context;
 using CarBook.Persistence.Repositories;
 using CarBook.Persistence.Repositories.BlogRepositories;
@@ -41,10 +42,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     opt.RequireHttpsMetadata = false;
     opt.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidAudience = "https://localhost",
-        ValidIssuer= "https://localhost",
+        ValidAudience = JwtTokenDefaults.ValidAudience,
+        ValidIssuer= JwtTokenDefaults.ValidIssuer,
         ClockSkew=TimeSpan.Zero,
-        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("carbookcarbook01")),
+        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)),
         ValidateLifetime=true,
         ValidateIssuerSigningKey=true
     };

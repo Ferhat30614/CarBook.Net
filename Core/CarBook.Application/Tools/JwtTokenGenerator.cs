@@ -14,7 +14,7 @@ namespace CarBook.Application.Tools
     public class JwtTokenGenerator
     {
 
-        public static TokenResponseDto GenerateToke(GetCheckAppUserQueryResult result)
+        public static TokenResponseDto GenerateToken(GetCheckAppUserQueryResult result)
         {
 
             var claims = new List<Claim>();
