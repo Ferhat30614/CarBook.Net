@@ -1,5 +1,4 @@
-﻿using CarBook.Dto.AppUserDtos;
-using CarBook.Dto.RegisterDtos;
+﻿using CarBook.Dto.RegisterDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
