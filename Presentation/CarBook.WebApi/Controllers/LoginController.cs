@@ -18,6 +18,7 @@ namespace CarBook.WebApi.Controllers
             _mediator = mediator;
         }
 
+        [HttpPost]
         public async Task<IActionResult> Index(GetCheckAppUserQuery query)
         {
             var value = await _mediator.Send(query);
