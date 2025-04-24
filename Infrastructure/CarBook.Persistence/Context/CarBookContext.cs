@@ -17,6 +17,8 @@ namespace CarBook.Persistence.Context
                 "User ID=sa;Password=ferhat123;TrustServerCertificate=True");
         }
 
+
+        //bu bir deneme yazısıdır...
         public DbSet<About> Abouts { get; set; }
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Brand> Brands { get; set; }
