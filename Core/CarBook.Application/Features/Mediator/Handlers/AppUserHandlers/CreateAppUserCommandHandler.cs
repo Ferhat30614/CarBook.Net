@@ -14,12 +14,10 @@ namespace CarBook.Application.Features.Mediator.Handlers.AppUserHandlers
     public class CreateAppUserCommandHandler : IRequestHandler<CreateAppUserCommand>
     {
         private readonly IRepository<AppUser> _repository;
-        private readonly IRepository<AppRole> _Rolerepository;
 
         public CreateAppUserCommandHandler(IRepository<AppUser> repository, IRepository<AppRole> rolerepository)
         {
             _repository = repository;
-            _Rolerepository = rolerepository;
         }
 
         public async Task Handle(CreateAppUserCommand request, CancellationToken cancellationToken)
@@ -28,7 +26,10 @@ namespace CarBook.Application.Features.Mediator.Handlers.AppUserHandlers
             {
                 UserName = request.Username,
                 Password = request.Password,
-                AppRoleId =  (int)RoleTypes.Member /*(_Rolerepository.GetAllAsync().Result.Where(a => a.AppRoleName == "Admin"))*/
+                AppRoleId =  (int)RoleTypes.Member, /*(_Rolerepository.GetAllAsync().Result.Where(a => a.AppRoleName == "Admin"))*/
+                Name = request.Name,    
+                Email = request.Email,  
+                Surname = request.Surname,      
             });
         }
     }
