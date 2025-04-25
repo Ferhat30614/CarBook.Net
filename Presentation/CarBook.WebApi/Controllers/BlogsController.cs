@@ -2,11 +2,13 @@
 using CarBook.Application.Features.Mediator.Queries.BlogQueries;
 using CarBook.Application.Features.Mediator.Results.BlogResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebApi.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class BlogsController : ControllerBase
@@ -20,7 +22,7 @@ namespace CarBook.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> BlogList()
         {
-            var values =  _mediator.Send(new GetBlogQuery());
+            var values =  await _mediator.Send(new GetBlogQuery());
             return Ok(values);
 
         }
