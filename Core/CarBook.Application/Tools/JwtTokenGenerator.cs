@@ -27,6 +27,9 @@ namespace CarBook.Application.Tools
             if(!string.IsNullOrWhiteSpace(result.UserName))
                 claims.Add(new Claim("Username", result.UserName));
 
+            claims.Add(new Claim("Eposta", "ferhat123.ftr69@gmail.com"));/// deneme
+
+
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key));
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

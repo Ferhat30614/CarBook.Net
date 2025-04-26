@@ -21,7 +21,8 @@ namespace CarBook.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var token = User.Claims.FirstOrDefault(a => a.Type == "accesToken").Value;
+            var token = User.Claims.FirstOrDefault(a => a.Type == "accesToken").Value; // burada User, şu anki oturum açmış kullanıcıyı temsil eder. ve kullanımı httpcontext üzerinden yani kütüphane gerekmez...
+            // User.Claims diyerek ben geçerli  kullanıcının tüm claims değerlerine erişmiş olurum ve zaten
             if (token != null)
             {
                 var client = _httpClientFactory.CreateClient();
