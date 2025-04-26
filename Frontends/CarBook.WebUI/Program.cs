@@ -13,10 +13,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCo
         opt.LogoutPath = "/Login/Logout/";
         opt.AccessDeniedPath= "/Pages/AccessDenied/";
         opt.Cookie.SameSite = SameSiteMode.Strict;
-        opt.Cookie.HttpOnly = true;
+        opt.Cookie.HttpOnly = true; //Bu ayar, cookie'yi sadece sunucu tarafında erişilebilir yapar
         opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-        opt.Cookie.Name = "CarBookJwt";
-        
+        opt.Cookie.Name = "CarBookJwt";//Burada cookie'nin ismi belirleniyor. Bu örnekte, cookie'nin adı "CarBookJwt" olarak belirlendi
+
     });
 
 var app = builder.Build();
