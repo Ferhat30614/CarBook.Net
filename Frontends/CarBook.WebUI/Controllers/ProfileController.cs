@@ -11,11 +11,13 @@ namespace CarBook.WebUI.Controllers
             var rol = User.Claims.FirstOrDefault(a => a.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
 
             var token = User.Claims.FirstOrDefault(a => a.Type == "accesToken").Value;
+            var Eposta = User.Claims.FirstOrDefault(a => a.Type == "Eposta").Value;
 
             ViewBag.UserName = username;
             ViewBag.aud = aud;
             ViewBag.rol = rol;
             ViewBag.token = token;
+            ViewBag.Eposta = Eposta;
 
 
 
