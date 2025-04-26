@@ -3,6 +3,11 @@ using CarBook.Dto.RegisterDtos;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text;
+using CarBook.WebUI.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;
 
 namespace CarBook.WebUI.Controllers
 {
@@ -30,13 +35,34 @@ namespace CarBook.WebUI.Controllers
             var content = new StringContent(JsonSerializer.Serialize(createLoginDto),Encoding.UTF8,"application/json");
             var response = await client.PostAsync("https://localhost:7192/api/Login",content);
 
-            if (response != null)
+            if (response.IsSuccessStatusCode)
             {
                 var dataJson=await response.Content.ReadAsStringAsync();
-                var tokenModel=
-            }
+                var tokenModel = JsonSerializer.Deserialize<JwtResponseModel>(dataJson,new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy=JsonNamingPolicy.CamelCase,
+                });
 
-            
+                if (tokenModel != null)
+                {
+                    JwtSecurityTokenHandler handler= new JwtSecurityTokenHandler();
+                    var token = handler.ReadJwtToken(tokenModel.Token);
+                    var claims=token.Claims.ToList();
+                    if (tokenModel.Token != null)
+                    {
+                        claims.Add(new Claim("accesToken",tokenModel.Token));
+                        var claimsIdentity=new ClaimsIdentity(claims,JwtBearerDefaults.AuthenticationScheme);
+                        var authProps = new AuthenticationProperties
+                        {
+                            ExpiresUtc=tokenModel.ExpireDate,
+                            IsPersistent=true,  
+                        };
+
+                        await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),authProps);
+                        return RedirectToAction("Index","Default");
+                    }
+                }
+            }            
             return View();
         }
     }
