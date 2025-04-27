@@ -41,7 +41,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(opt =>
 {
-    opt.AddPolicy("CorsPolicy", builder =>
+    opt.AddPolicy("CorsPolicy", builder =>   // CorsPolicy isminde bir cors politikası tanımladık ve kurallarını devamında girdik
     {
         builder.AllowAnyHeader()
         .AllowAnyMethod()
@@ -50,7 +50,10 @@ builder.Services.AddCors(opt =>
     });
 });
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddSignalR();  
+
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
@@ -66,8 +69,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey=true
     };
 });
-
-
 
 #region Registiration
 // Add services to the container.
@@ -132,7 +133,6 @@ builder.Services.AddApplicationService(builder.Configuration);  // mediatr için
 #endregion
 
 
-
 builder.Services.AddControllers().AddFluentValidation(x =>
 {
     x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
@@ -152,14 +152,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-app.UseCors("CorsPolicy");  
+app.UseCors("CorsPolicy");   // daha önce tanımladımız  bu politikayı uygulayacamızı belirttik
 app.UseHttpsRedirection();
 
 app.UseAuthentication();    
 app.UseAuthorization();
 
 app.MapControllers();
+
 app.MapHub<CarHub>("/carhub");
+//CarHub: Bu, SignalR ile ilgili özel bir sınıftır. SignalR, istemcilerle sunucu arasındaki anlık bağlantıyı yöneten sınıf burada CarHub olarak adlandırılmış.
+//"/carhub": Hub'ı istemcilerin bağlanabilmesi için belirtilen URL'dir. İstemciler bu URL üzerinden CarHub'a bağlanarak mesaj alabilir ve gönderebilirler.
 
 app.Run();
