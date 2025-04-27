@@ -20,12 +20,10 @@ namespace CarBook.WebApi.Hubs
 
             var responseMessage = await client.GetAsync("https://localhost:7192/api/Statistics/GetCarCount");
             
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<ResultStatisticDto>(jsonData);
-                
-            
-            
+            var value = await responseMessage.Content.ReadAsStringAsync();
 
+            await Clients.All.SendAsync("ReceiveCarCount",value); 
+            
         }
 
 
