@@ -8,7 +8,7 @@ namespace CarBook.Dto.RentACarDtos
 {
     public class FilterRentACarDto
     {
-        public int CarID { get; set; }      
+        public int CarID { get; set; }      // car ıdye göre  arabanın günlük fiyatı getir carıd birde    pricingıd =3,      carid
         public string Brand { get; set; }
         public string Model { get; set; }
         public decimal Amount { get; set; }

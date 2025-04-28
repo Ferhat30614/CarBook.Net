@@ -12,5 +12,6 @@ namespace CarBook.Application.Interfaces.CarPricingInterfaces
     {
         List<CarPricing> GetCarPricingWithPricing();
         List<CarPricingViewModel> GetCarPricingWithTimePeriod();
+        public decimal GetDailyPriceByCarId(int carId);
     }
 }

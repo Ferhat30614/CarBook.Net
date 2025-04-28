@@ -10,7 +10,6 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                
                 <div class="col-md-4">
                     <div class="car-wrap rounded ftco-animate">
                         <div class="img rounded d-flex align-items-end" style="background-image: url(@item.CoverImageUrl);">
@@ -19,7 +18,7 @@
                             <h2 class="mb-0"><a href="car-single.html">@item.Model</a></h2>
                             <div class="d-flex mb-3">
                                 <span class="cat">@item.Brand</span>
-                                <p class="price ml-auto">0.00 <span>/Günlük</span></p>
+                                <p class="price ml-auto">@item.Amount <span>/Günlük</span></p>
                             </div>
                             <p class="d-flex mb-0 d-block">
                                 <a href="#" class="btn btn-primary py-2 mr-1">Hemen Kirala</a>
@@ -33,9 +32,4 @@
 
     </div>
 </section>
-
-
-<br />
-@ViewBag.LocationID = LocationID;
-<br />
 

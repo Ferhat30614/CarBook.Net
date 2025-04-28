@@ -1,5 +1,6 @@
 ﻿using CarBook.Application.Features.Mediator.Queries.RentACarQueries;
 using CarBook.Application.Features.Mediator.Results.RentACarResults;
+using CarBook.Application.Interfaces.CarPricingInterfaces;
 using CarBook.Application.Interfaces.RentACarIntefaces;
 using CarBook.Domain.Entities;
 using MediatR;
@@ -14,10 +15,12 @@ namespace CarBook.Application.Features.Mediator.Handlers.RentACarHandlers
     public class GetRentACarQueryHandler : IRequestHandler<GetRentACarQuery,List<GetRentACarQueryResult>>
     {
         private readonly IRentACarRepository _rentACarRepository;
+        private readonly ICarPricingRepository _carPricingRepository;
 
-        public GetRentACarQueryHandler(IRentACarRepository rentACarRepository)
+        public GetRentACarQueryHandler(IRentACarRepository rentACarRepository, ICarPricingRepository carPricingRepository)
         {
             _rentACarRepository = rentACarRepository;
+            _carPricingRepository = carPricingRepository;
         }
 
         public async Task<List<GetRentACarQueryResult>> Handle(GetRentACarQuery request, CancellationToken cancellationToken)
@@ -30,6 +33,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.RentACarHandlers
                 Brand=y.Car.Brand.Name,
                 Model=y.Car.Model,
                 CoverImageUrl=y.Car.CoverImageUrl,  
+                Amount=_carPricingRepository.GetDailyPriceByCarId(y.CarID), 
 
             }).ToList();    
         }
