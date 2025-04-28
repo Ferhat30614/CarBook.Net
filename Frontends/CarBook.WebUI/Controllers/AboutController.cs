@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebUI.Controllers
 {
-    [Authorize]
     public class AboutController : Controller
     {
         public IActionResult Index()

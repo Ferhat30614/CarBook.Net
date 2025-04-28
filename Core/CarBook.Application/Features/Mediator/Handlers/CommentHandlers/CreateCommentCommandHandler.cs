@@ -27,9 +27,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.CommentHandlers
                 CreatedDate=DateTime.Parse(DateTime.Now.ToShortDateString()),
                 BlogID=request.BlogID,  
                 Description=request.Description,
-                Email=request.Email,    
-                
-                
+                Email=request.Email, 
             });
         }
     }

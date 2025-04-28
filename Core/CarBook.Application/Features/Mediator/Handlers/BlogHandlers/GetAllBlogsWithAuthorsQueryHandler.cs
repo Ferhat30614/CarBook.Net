@@ -1,6 +1,8 @@
 ﻿using CarBook.Application.Features.Mediator.Queries.BlogQueries;
 using CarBook.Application.Features.Mediator.Results.BlogResults;
+using CarBook.Application.Features.RepositoryPattern;
 using CarBook.Application.Interfaces.BlogInterfaces;
+using CarBook.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,11 +15,14 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogHandlers
     public class GetAllBlogsWithAuthorsQueryHandler : IRequestHandler<GetAllBlogsWithAuthorsQuery, List<GetAllBlogsWithAuthorsQueryResult>>
     {
         private readonly IBlogRepository _repository;
+        private readonly IGenericRepository<Comment> _commentRepository;
 
-        public GetAllBlogsWithAuthorsQueryHandler(IBlogRepository repository)
+        public GetAllBlogsWithAuthorsQueryHandler(IBlogRepository repository, IGenericRepository<Comment> commentRepository)
         {
             _repository = repository;
+            _commentRepository = commentRepository;
         }
+
         public async Task<List<GetAllBlogsWithAuthorsQueryResult>> Handle(GetAllBlogsWithAuthorsQuery request, CancellationToken cancellationToken)
         {
 
@@ -29,10 +34,11 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogHandlers
                 AuthorID = x.AuthorID,
                 AuthorName = x.Author.Name,
                 CreatedDate = x.CreatedDate,
-                CategoryID = x.CategoryID,   
+                CategoryID = x.CategoryID,
                 Title = x.Title,
                 CoverImage = x.CoverImage,
-                Description = x.Description,    
+                Description = x.Description,
+                CommentCount = _commentRepository.GetCountCommentByBlog(x.BlogID)
 
 
             }).ToList();

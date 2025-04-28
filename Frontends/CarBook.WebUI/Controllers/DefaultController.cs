@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NuGet.Common;
 using System.Net.Http.Headers;
 
 namespace CarBook.WebUI.Controllers
@@ -21,29 +22,49 @@ namespace CarBook.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var token = User.Claims.FirstOrDefault(a => a.Type == "accesToken").Value; // burada User, şu anki oturum açmış kullanıcıyı temsil eder. ve kullanımı httpcontext üzerinden yani kütüphane gerekmez...
-            // User.Claims diyerek ben geçerli  kullanıcının tüm claims değerlerine erişmiş olurum ve zaten
-            if (token != null)
+            //var token = User.Claims.FirstOrDefault(a => a.Type == "accesToken").Value; // burada User, şu anki oturum açmış kullanıcıyı temsil eder. ve kullanımı httpcontext üzerinden yani kütüphane gerekmez...
+            //// User.Claims diyerek ben geçerli  kullanıcının tüm claims değerlerine erişmiş olurum ve zaten
+            //if (token != null)
+            //{
+            //    var client = _httpClientFactory.CreateClient();
+            //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            //    var responseMessage = await client.GetAsync("https://localhost:7192/api/Locations");
+            //    if (responseMessage.IsSuccessStatusCode)
+            //    {
+            //        var dataJson = await responseMessage.Content.ReadAsStringAsync();
+            //        var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(dataJson);
+
+            //        List<SelectListItem> values2 = (from x in values
+            //                                        select new SelectListItem
+            //                                        {
+            //                                            Text = x.Name,
+            //                                            Value = x.LocationID.ToString()
+            //                                        }).ToList();
+            //        ViewBag.v = values2;
+
+            //    }
+            //}
+            //return View();
+
+
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7192/api/Locations");
+            if (responseMessage.IsSuccessStatusCode)
             {
-                var client = _httpClientFactory.CreateClient();
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                var responseMessage = await client.GetAsync("https://localhost:7192/api/Locations");
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    var dataJson = await responseMessage.Content.ReadAsStringAsync();
-                    var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(dataJson);
+                var dataJson = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(dataJson);
 
-                    List<SelectListItem> values2 = (from x in values
-                                                    select new SelectListItem
-                                                    {
-                                                        Text = x.Name,
-                                                        Value = x.LocationID.ToString()
-                                                    }).ToList();
-                    ViewBag.v = values2;
+                List<SelectListItem> values2 = (from x in values
+                                                select new SelectListItem
+                                                {
+                                                    Text = x.Name,
+                                                    Value = x.LocationID.ToString()
+                                                }).ToList();
+                ViewBag.v = values2;
 
-                }
             }
-            return View();
+
+            return View();      
         }
 
         [HttpPost]

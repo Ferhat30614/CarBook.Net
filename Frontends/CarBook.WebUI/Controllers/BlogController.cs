@@ -60,7 +60,7 @@ namespace CarBook.WebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7192/api/Comments/CreateComment", content);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "Default");
+                return RedirectToAction( "BlogDetails", new {id=createCommentDto.BlogID});
 
             }
             return View();
