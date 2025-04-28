@@ -7,15 +7,18 @@
 		<div class="col-md-4">
 			<ul class="features">
 
-				@foreach (var item in Model)
-				{
-					@if(item.Available==true){
-						<li class="check"><span class="ion-ios-checkmark"></span>@item.FeatureName</li>		
-					}	
-					else{
-						<li class="remove"><span class="ion-ios-checkmark"></span>@item.FeatureName</li>
+					@foreach (var item in Model)
+					{
+						@if (item.Available == true)
+						{
+							<li class="check"><span class="ion-ios-checkmark"></span>@item.FeatureName</li>
+						}
+						else
+						{
+							<li class="remove"><span class="ion-ios-checkmark"></span>@item.FeatureName</li>
+						}
 					}
-				}
+
 			</ul>
 		</div>
 
