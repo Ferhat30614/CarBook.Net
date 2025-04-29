@@ -3,9 +3,11 @@ using CarBook.Dto.BrandDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarBook.WebUI.Controllers
 {
+    [Authorize]
     public class AdminBrandController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
