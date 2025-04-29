@@ -13,6 +13,10 @@ namespace CarBook.Application.Features.Mediator.Queries.BlogLikeQueries
         public int BlogID { get; set; }
         public int AppUserID { get; set; }
 
-        
+        public GetBlogLikeByBlogIdQuery(int blogID, int appUserID)
+        {
+            BlogID = blogID;
+            AppUserID = appUserID;
+        }
     }
 }

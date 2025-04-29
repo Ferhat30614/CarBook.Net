@@ -22,11 +22,13 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogLikeHandlers
 
         public async Task<GetBlogLikeByBlogIdQueryResult> Handle(GetBlogLikeByBlogIdQuery request, CancellationToken cancellationToken)
         {
-            return  new GetBlogLikeByBlogIdQueryResult
+            return new GetBlogLikeByBlogIdQueryResult
             {
-                
+
                 LikeCount = _blogLikeRepository.GetLikeCountByBlogId(request.BlogID),
-                DislikeCount= _blogLikeRepository.GetDislikeCountByBlogId(request.BlogID),
+                DislikeCount = _blogLikeRepository.GetDislikeCountByBlogId(request.BlogID),
+                UserVote = _blogLikeRepository.GetUserLikeStatus(request.BlogID,request.AppUserID)
+
             };
         }
     }

@@ -26,5 +26,12 @@ namespace CarBook.Persistence.Repositories.BlogLikeRepositories
         {
             return _context.BlogLikes.Where(a=>a.BlogID==BlogId && a.IsLike==true).Count();                
         }
+
+        public bool? GetUserLikeStatus(int BlogId, int AppUserId)
+        {
+            var values = _context.BlogLikes.Where(a => a.BlogID == BlogId && a.AppUserID == AppUserId).FirstOrDefault(); 
+
+            return values?.IsLike;   
+        }
     }
 }

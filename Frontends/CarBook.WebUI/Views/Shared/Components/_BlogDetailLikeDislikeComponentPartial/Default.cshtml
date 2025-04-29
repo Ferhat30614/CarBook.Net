@@ -1,0 +1,13 @@
+﻿@model ResultBlogLikeDto
+
+<form method="post"> 
+
+
+    <button class="btn @(Model.UserVote==true ? "btn-success" : "btn-outline-success")">
+        👍 @Model.LikeCount  </button>
+
+    <button class="btn @(Model.UserVote==false ? "btn-danger" : "btn-outline-danger")"> 
+        👎 @Model.DislikeCount</button>
+
+
+</form>

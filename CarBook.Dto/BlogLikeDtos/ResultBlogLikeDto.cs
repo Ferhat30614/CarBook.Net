@@ -1,17 +1,16 @@
-﻿using CarBook.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Application.Features.Mediator.Results.BlogLikeResults
+namespace CarBook.Dto.BlogLikeDtos
 {
-    public class GetBlogLikeByBlogIdQueryResult
-    {      
-
+    public class ResultBlogLikeDto
+    {
         public int LikeCount { get; set; }
         public int DislikeCount { get; set; }
         public bool? UserVote { get; set; }
+
     }
 }
