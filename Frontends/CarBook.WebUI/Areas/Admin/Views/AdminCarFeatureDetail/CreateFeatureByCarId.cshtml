@@ -4,7 +4,7 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-@model List<ResultFeatureDto>
+@model List<CreateCarFeatureByCarIdDto>
 
 <div class="page-content">
     <div class="container-fluid">
@@ -23,7 +23,8 @@
                                 <div class="form-check">
                                     <input type="hidden" asp-for="@Model[i].FeatureID" />
                                     <input type="hidden" asp-for="@Model[i].Name" />
-                                    <input type="checkbox" class="form-check-input"/>
+                                    <input type="hidden" value="@ViewBag.CarId" asp-for="@Model[i].CarID" />
+                                    <input type="checkbox"  asp-for="@Model[i].Available"  class="form-check-input"/>
                                     <label class="form-check-label" >@Model[i].Name</label>
                                 </div>
 

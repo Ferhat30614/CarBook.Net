@@ -1,9 +1,11 @@
-﻿using CarBook.Dto.CarFeatureDtos;
+﻿using CarBook.Dto.CarDtos;
+using CarBook.Dto.CarFeatureDtos;
 using CarBook.Dto.CategoryDtos;
 using CarBook.Dto.FeatureDtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace CarBook.WebUI.Areas.Admin.Controllers
 {
@@ -60,20 +62,53 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
 
         [HttpGet]
-        [Route("CreateFeatureByCarId")]
-        public async Task<IActionResult> CreateFeatureByCarId()
+        [Route("CreateFeatureByCarId/{id}")]
+        public async Task<IActionResult> CreateFeatureByCarId(int id)
         {
+
+            ViewBag.CarId = id;
 
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7192/api/Features");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var dataJson = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultFeatureDto>>(dataJson);
+                var values = JsonConvert.DeserializeObject<List<CreateCarFeatureByCarIdDto>>(dataJson);
                 return View(values);
             }
             return View();
 
+
+        }
+        
+        [HttpPost]
+        [Route("CreateFeatureByCarId/{id}")]
+        public async Task<IActionResult> CreateFeatureByCarId(List<CreateCarFeatureByCarIdDto> createCarFeatureByCarIdDtos)
+        {
+
+            foreach (var item in createCarFeatureByCarIdDtos)
+            {
+
+
+                if (item.Available == true)
+                {
+                    var client = _httpClientFactory.CreateClient();
+                    var jsonData = JsonConvert.SerializeObject(item);                   
+
+                    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    var responseMessage = await client.PostAsync("https://localhost:7192/api/CarFeatures", content);
+
+
+                }
+                
+            }
+
+            return RedirectToAction("Index", "AdminCar");
+
+
+          
+           
+            
 
         }
     }
