@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,16 @@ namespace CarBook.Persistence.Repositories.CarFeatureRepositories
             _context.SaveChanges();
         }
 
+        public async  Task<bool> CheckCarFeatureByFilter(Expression<Func<CarFeature, bool>> filter)
+        {
+            var value=await _context.CarFeatures.Where(filter).FirstOrDefaultAsync();
+            if (value==null)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void CreateCarFeatureByCar(CarFeature carFeature)
         {
             _context.CarFeatures.Add(carFeature);
@@ -44,5 +55,8 @@ namespace CarBook.Persistence.Repositories.CarFeatureRepositories
             var values=_context.CarFeatures.Include(y=>y.Feature).Where(x=>x.CarID==CarID).ToList();     
             return values;
         }
+
+
+        
     }
 }

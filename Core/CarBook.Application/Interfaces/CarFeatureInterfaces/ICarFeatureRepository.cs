@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,5 +14,9 @@ namespace CarBook.Application.Interfaces.CarFeatureInterfaces
         void ChangeCarFeatureAvailableToFalse(int CarFeatureID);
         void ChangeCarFeatureAvailableToTrue(int CarFeatureID);
         void CreateCarFeatureByCar(CarFeature carFeature);
+
+        Task<bool> CheckCarFeatureByFilter(Expression<Func<CarFeature, bool>> filter);
+
+        
     }
 }

@@ -21,12 +21,21 @@ namespace CarBook.Application.Features.Mediator.Handlers.CarFeatureHandlers
 
         public async Task Handle(CreateCarFeatureByCarCommand request, CancellationToken cancellationToken)
         {
-            _carFeatureRepository.CreateCarFeatureByCar(new CarFeature
+            var value = await _carFeatureRepository.CheckCarFeatureByFilter(a=>a.CarID==request.CarID && a.FeatureID==request.FeatureID);
+
+            if (value==false)
             {
-                Available=false,
-                CarID=request.CarID,    
-                FeatureID=request.FeatureID,    
-            });
+                _carFeatureRepository.CreateCarFeatureByCar(new CarFeature
+                {
+                    Available = false,
+                    CarID = request.CarID,
+                    FeatureID = request.FeatureID,
+                });
+
+            }
+
+
+            
         }
     }
 }

@@ -98,6 +98,15 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
                     StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                     var responseMessage = await client.PostAsync("https://localhost:7192/api/CarFeatures", content);
 
+                    if (responseMessage.IsSuccessStatusCode) {
+
+                        Console.WriteLine("güzel");
+                    
+                    
+                    }
+
+                    
+
 
                 }
                 
@@ -105,10 +114,6 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
             return RedirectToAction("Index", "AdminCar");
 
-
-          
-           
-            
 
         }
     }
