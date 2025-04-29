@@ -16,5 +16,6 @@ namespace CarBook.Domain.Entities
         public string Email { get; set; } 
         public int AppRoleId { get; set; }
         public AppRole AppRole { get; set; } = null!;
+        public List<BlogLike> BlogLikes { get; set; }
     }
 }

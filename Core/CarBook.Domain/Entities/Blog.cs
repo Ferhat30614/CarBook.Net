@@ -19,6 +19,7 @@ namespace CarBook.Domain.Entities
         public DateTime CreatedDate { get; set; }
         public List<TagCloud> TagClouds { get; set; }  
         public List<Comment> Comments { get; set; }  
+        public List<BlogLike> BlogLikes { get; set; }  
 
 
     }
