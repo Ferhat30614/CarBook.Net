@@ -45,7 +45,7 @@ namespace CarBook.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCarFeatureByCar(CreateCarFeatureByCarCommand createCarFeatureByCarCommand)
         {
-            var values =  _mediator.Send(createCarFeatureByCarCommand);
+              await _mediator.Send(createCarFeatureByCarCommand);  // asenkron işlemler oldundan burda await ekledim
 
             return Ok("Başarıyla Arabaya Göre Özellik  Eklendi");
         }
