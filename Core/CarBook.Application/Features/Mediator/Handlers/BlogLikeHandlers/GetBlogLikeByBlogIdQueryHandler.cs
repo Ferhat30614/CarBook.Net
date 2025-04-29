@@ -1,5 +1,6 @@
 ﻿using CarBook.Application.Features.Mediator.Queries.BlogLikeQueries;
 using CarBook.Application.Features.Mediator.Results.BlogLikeResults;
+using CarBook.Application.Interfaces.BlogLikeInterfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,21 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogLikeHandlers
     public class GetBlogLikeByBlogIdQueryHandler : IRequestHandler<GetBlogLikeByBlogIdQuery, GetBlogLikeByBlogIdQueryResult>
     {
 
+        private readonly IBlogLikeRepository _blogLikeRepository;
 
-
-
-        public Task<GetBlogLikeByBlogIdQueryResult> Handle(GetBlogLikeByBlogIdQuery request, CancellationToken cancellationToken)
+        public GetBlogLikeByBlogIdQueryHandler(IBlogLikeRepository blogLikeRepository)
         {
-            throw new NotImplementedException();
+            _blogLikeRepository = blogLikeRepository;
+        }
+
+        public async Task<GetBlogLikeByBlogIdQueryResult> Handle(GetBlogLikeByBlogIdQuery request, CancellationToken cancellationToken)
+        {
+            return  new GetBlogLikeByBlogIdQueryResult
+            {
+                
+                LikeCount = _blogLikeRepository.GetLikeCountByBlogId(request.BlogID),
+                DislikeCount= _blogLikeRepository.GetDislikeCountByBlogId(request.BlogID),
+            };
         }
     }
 }

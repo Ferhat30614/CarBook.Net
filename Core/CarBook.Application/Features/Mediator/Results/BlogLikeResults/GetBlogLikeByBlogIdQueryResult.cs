@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace CarBook.Application.Features.Mediator.Results.BlogLikeResults
 {
     public class GetBlogLikeByBlogIdQueryResult
-    {
-        public int BlogLikeID { get; set; }
+    {      
 
         public int LikeCount { get; set; }
         public int DislikeCount { get; set; }
