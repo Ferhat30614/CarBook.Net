@@ -67,12 +67,12 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
         }
 
 
-        public decimal GetDailyPriceByCarId(int carId)
+        public decimal? GetDailyPriceByCarId(int carId)
         {
 
             var value = _context.CarPricings.Where(a => a.CarID == carId && a.PricingID == 3).FirstOrDefault();
 
-            return value.Amount;
+            return value?.Amount;
 
             
 
