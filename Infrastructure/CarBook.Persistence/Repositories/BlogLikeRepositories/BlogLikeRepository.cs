@@ -35,7 +35,7 @@ namespace CarBook.Persistence.Repositories.BlogLikeRepositories
             return values?.IsLike;   
         }
 
-        public void GetUserLikeStatus(BlogLike blogLike)
+        public void CreateBlogLike(BlogLike blogLike)
         {
             _context.BlogLikes.Add(blogLike);   
             _context.SaveChanges();     

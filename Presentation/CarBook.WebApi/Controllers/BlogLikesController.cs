@@ -1,4 +1,5 @@
 ﻿using CarBook.Application.Features.Mediator.Commands.AppUserCommands;
+using CarBook.Application.Features.Mediator.Commands.BlogLikeCommands;
 using CarBook.Application.Features.Mediator.Queries.BlogLikeQueries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -22,6 +23,13 @@ namespace CarBook.WebApi.Controllers
         {
             var values = await _mediator.Send(new GetBlogLikeByBlogIdQuery(id,AppUserId));
             return Ok(values);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateBlogLike(CreateBlogLikeCommand createBlogLikeCommand)
+        {
+            await _mediator.Send(createBlogLikeCommand);
+            return Ok("BlogLike Başarılıyla ekledi");
         }
 
 

@@ -12,6 +12,6 @@ namespace CarBook.Application.Interfaces.BlogLikeInterfaces
         int GetLikeCountByBlogId(int BlogId); 
         int GetDislikeCountByBlogId(int BlogId); 
         bool? GetUserLikeStatus(int BlogId,int AppUserId); 
-        void GetUserLikeStatus(BlogLike blogLike); 
+        void CreateBlogLike(BlogLike blogLike); 
     }
 }

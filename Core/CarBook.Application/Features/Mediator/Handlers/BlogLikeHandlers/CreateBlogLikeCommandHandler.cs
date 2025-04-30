@@ -1,5 +1,6 @@
 ﻿using CarBook.Application.Features.Mediator.Commands.BlogLikeCommands;
 using CarBook.Application.Interfaces.BlogLikeInterfaces;
+using CarBook.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,15 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogLikeHandlers
             _blogLikeRepository = blogLikeRepository;
         }
 
-        public Task Handle(CreateBlogLikeCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateBlogLikeCommand request, CancellationToken cancellationToken)
         {
+             _blogLikeRepository.CreateBlogLike(new BlogLike
+            {
+                AppUserID = request.AppUserID,  
+                BlogID = request.BlogID,
+                IsLike = request.IsLike,    
+                CreateDate = DateTime.Now      
+            });
             
         }
     }
