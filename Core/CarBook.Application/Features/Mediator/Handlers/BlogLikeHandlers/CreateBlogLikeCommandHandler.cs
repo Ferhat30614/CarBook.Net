@@ -1,4 +1,5 @@
-﻿using CarBook.Application.Features.Mediator.Commands.BlogLikeCommands;
+﻿using CarBook.Application.Features.CQRS.Commands.AboutCommands;
+using CarBook.Application.Features.Mediator.Commands.BlogLikeCommands;
 using CarBook.Application.Interfaces.BlogLikeInterfaces;
 using CarBook.Domain.Entities;
 using MediatR;
@@ -21,13 +22,28 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogLikeHandlers
 
         public async Task Handle(CreateBlogLikeCommand request, CancellationToken cancellationToken)
         {
-             _blogLikeRepository.CreateBlogLike(new BlogLike
+            var value = _blogLikeRepository.GetBlogLikeByFilter(request.BlogID, request.AppUserID);
+            if (value == null) {
+
+                _blogLikeRepository.CreateBlogLike(new BlogLike
+                {
+                    AppUserID = request.AppUserID,
+                    BlogID = request.BlogID,
+                    IsLike = request.IsLike,
+                    CreateDate = DateTime.Now
+                });
+
+            }
+            else
             {
-                AppUserID = request.AppUserID,  
-                BlogID = request.BlogID,
-                IsLike = request.IsLike,    
-                CreateDate = DateTime.Now      
-            });
+                value.IsLike = request.IsLike;
+                value.CreateDate = DateTime.Now;
+                _blogLikeRepository.UpdateBlogLike(value);  
+
+            }
+
+
+            
             
         }
     }

@@ -48,6 +48,7 @@ namespace CarBook.WebUI.Controllers
         {
             ViewBag.BlogId = id;
             return PartialView();
+            
         }
 
 
@@ -66,5 +67,6 @@ namespace CarBook.WebUI.Controllers
             return View();
 
         }
+        
     }
 }

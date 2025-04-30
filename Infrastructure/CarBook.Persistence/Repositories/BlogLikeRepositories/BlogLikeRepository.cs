@@ -40,5 +40,16 @@ namespace CarBook.Persistence.Repositories.BlogLikeRepositories
             _context.BlogLikes.Add(blogLike);   
             _context.SaveChanges();     
         }
+
+        public BlogLike? GetBlogLikeByFilter(int blogId, int appUserId)
+        {
+            return _context.BlogLikes.Where(a => a.BlogLikeID == blogId && a.AppUserID == appUserId).FirstOrDefault();
+        }
+
+        public void UpdateBlogLike(BlogLike blogLike)
+        {
+            _context.BlogLikes.Update(blogLike);    
+            _context.SaveChanges(); 
+        }
     }
 }
