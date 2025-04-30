@@ -1,5 +1,7 @@
 ﻿@model List<ResultCommentDto>
 
+    
+
 <ul class="comment-list">
 
     @foreach (var item in Model) 
@@ -12,8 +14,15 @@
                 <h3>@item.Name</h3>
                 <div class="meta">@(((DateTime)item.CreatedDate).ToString("dd-MMM-yyyy"))</div>
                 <p>@item.Description</p>
+
+                @await Component.InvokeAsync("_CommentLikeDislikeComponentPartial", new { id =  item.CommentID})
+
+                
             </div>
-        </li>    
+        </li>
+
+
+
     }
 
 </ul>

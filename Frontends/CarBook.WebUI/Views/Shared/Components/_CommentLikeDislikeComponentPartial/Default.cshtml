@@ -1,0 +1,16 @@
+﻿@model ResultCommentLikeDto
+
+<form asp-controller="CommentLike" asp-action="CommentLikeDislike" method="post">
+
+    <input type="hidden" name="CommentID" value="@Model.CommentID" />
+    <input type="hidden" name="BlogID" value="@ViewBag.BlogId" />
+    <button type="submit" name="IsLike" value="true" class="btn @(Model.UserVote==true ? "btn-success" : "btn-outline-success")">
+        👍 @Model.LikeCount
+    </button>
+
+    <button type="submit" name="IsLike" value="false" class="btn @(Model.UserVote==false ? "btn-danger" : "btn-outline-danger")">
+        👎 @Model.DislikeCount
+    </button>
+
+
+</form>
