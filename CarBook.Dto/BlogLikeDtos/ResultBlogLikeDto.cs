@@ -10,6 +10,7 @@ namespace CarBook.Dto.BlogLikeDtos
     {
         public int LikeCount { get; set; }
         public int DislikeCount { get; set; }
+        public int BlogID { get; set; }
         public bool? UserVote { get; set; }
 
     }

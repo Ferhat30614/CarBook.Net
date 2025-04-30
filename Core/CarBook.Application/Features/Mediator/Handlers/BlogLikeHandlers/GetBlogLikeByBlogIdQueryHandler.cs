@@ -1,6 +1,7 @@
 ﻿using CarBook.Application.Features.Mediator.Queries.BlogLikeQueries;
 using CarBook.Application.Features.Mediator.Results.BlogLikeResults;
 using CarBook.Application.Interfaces.BlogLikeInterfaces;
+using CarBook.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,8 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogLikeHandlers
 
                 LikeCount = _blogLikeRepository.GetLikeCountByBlogId(request.BlogID),
                 DislikeCount = _blogLikeRepository.GetDislikeCountByBlogId(request.BlogID),
-                UserVote = _blogLikeRepository.GetUserLikeStatus(request.BlogID,request.AppUserID)
+                UserVote = _blogLikeRepository.GetUserLikeStatus(request.BlogID,request.AppUserID),
+                BlogID=request.BlogID,
 
             };
         }

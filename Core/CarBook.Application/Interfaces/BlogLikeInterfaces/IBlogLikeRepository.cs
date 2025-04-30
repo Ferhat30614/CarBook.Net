@@ -14,6 +14,7 @@ namespace CarBook.Application.Interfaces.BlogLikeInterfaces
         bool? GetUserLikeStatus(int BlogId,int AppUserId); 
         void CreateBlogLike(BlogLike blogLike); 
         void UpdateBlogLike(BlogLike blogLike); 
+        void RemoveBlogLike(BlogLike blogLike); 
 
         BlogLike? GetBlogLikeByFilter(int blogId,int appUserId);   
 

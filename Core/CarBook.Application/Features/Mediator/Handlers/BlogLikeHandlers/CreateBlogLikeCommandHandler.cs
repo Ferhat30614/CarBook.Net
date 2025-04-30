@@ -36,9 +36,19 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogLikeHandlers
             }
             else
             {
-                value.IsLike = request.IsLike;
-                value.CreateDate = DateTime.Now;
-                _blogLikeRepository.UpdateBlogLike(value);  
+                if (value.IsLike == request.IsLike)
+                {
+                    _blogLikeRepository.RemoveBlogLike(value);
+                    
+                }
+                else
+                {
+                    value.IsLike = request.IsLike;
+                    value.CreateDate = DateTime.Now;
+                    _blogLikeRepository.UpdateBlogLike(value);
+                }
+
+               
 
             }
 

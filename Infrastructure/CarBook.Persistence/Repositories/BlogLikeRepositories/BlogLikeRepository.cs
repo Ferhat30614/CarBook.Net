@@ -43,12 +43,18 @@ namespace CarBook.Persistence.Repositories.BlogLikeRepositories
 
         public BlogLike? GetBlogLikeByFilter(int blogId, int appUserId)
         {
-            return _context.BlogLikes.Where(a => a.BlogLikeID == blogId && a.AppUserID == appUserId).FirstOrDefault();
+            return _context.BlogLikes.Where(a => a.BlogID == blogId && a.AppUserID == appUserId).FirstOrDefault();
         }
 
         public void UpdateBlogLike(BlogLike blogLike)
         {
             _context.BlogLikes.Update(blogLike);    
+            _context.SaveChanges(); 
+        }
+
+        public void RemoveBlogLike(BlogLike blogLike)
+        {
+            _context.Remove(blogLike);  
             _context.SaveChanges(); 
         }
     }
