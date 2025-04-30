@@ -28,7 +28,7 @@ namespace CarBook.WebUI.Controllers
                 var createCommentLikeDto = new CreateCommentLikeDto
                 {
                     AppUserID = userid,
-                    CommentID = CommentID,
+                    CommentID = CommentID,  
                     IsLike = IsLike,
                 };
 
