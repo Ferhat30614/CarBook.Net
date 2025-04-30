@@ -33,8 +33,6 @@ namespace CarBook.WebUI.Controllers
                 return View(values);
             }
             return View();
-
-
         }
     }
 }

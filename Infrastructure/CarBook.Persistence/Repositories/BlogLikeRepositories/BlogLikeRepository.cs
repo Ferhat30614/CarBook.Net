@@ -1,4 +1,5 @@
 ﻿using CarBook.Application.Interfaces.BlogLikeInterfaces;
+using CarBook.Domain.Entities;
 using CarBook.Persistence.Context;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,12 @@ namespace CarBook.Persistence.Repositories.BlogLikeRepositories
             var values = _context.BlogLikes.Where(a => a.BlogID == BlogId && a.AppUserID == AppUserId).FirstOrDefault(); 
 
             return values?.IsLike;   
+        }
+
+        public void GetUserLikeStatus(BlogLike blogLike)
+        {
+            _context.BlogLikes.Add(blogLike);   
+            _context.SaveChanges();     
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarBook.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace CarBook.Application.Interfaces.BlogLikeInterfaces
         int GetLikeCountByBlogId(int BlogId); 
         int GetDislikeCountByBlogId(int BlogId); 
         bool? GetUserLikeStatus(int BlogId,int AppUserId); 
+        void GetUserLikeStatus(BlogLike blogLike); 
     }
 }
