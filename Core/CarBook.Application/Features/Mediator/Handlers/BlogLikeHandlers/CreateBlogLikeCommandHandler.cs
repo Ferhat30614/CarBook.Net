@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Handlers.BlogLikeHandlers
 {
-    public class CreateBlogLikeCommandHandler : IRequestHandler<CreateCommentLikeCommand>
+    public class CreateBlogLikeCommandHandler : IRequestHandler<CreateBlogLikeCommand>
     {
         private readonly IBlogLikeRepository _blogLikeRepository;
 
@@ -20,7 +20,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.BlogLikeHandlers
             _blogLikeRepository = blogLikeRepository;
         }
 
-        public async Task Handle(CreateCommentLikeCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateBlogLikeCommand request, CancellationToken cancellationToken)
         {
             var value = _blogLikeRepository.GetBlogLikeByFilter(request.BlogID, request.AppUserID);
             if (value == null) {
