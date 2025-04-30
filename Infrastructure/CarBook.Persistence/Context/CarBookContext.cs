@@ -47,6 +47,7 @@ namespace CarBook.Persistence.Context
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<BlogLike> BlogLikes { get; set; }
+        public DbSet<CommentLike> CommentLikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

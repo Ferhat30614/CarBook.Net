@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebUI.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         public IActionResult Index()
@@ -18,7 +20,6 @@ namespace CarBook.WebUI.Controllers
             ViewBag.rol = rol;
             ViewBag.token = token;
             ViewBag.Eposta = Eposta;
-
 
 
             return View();

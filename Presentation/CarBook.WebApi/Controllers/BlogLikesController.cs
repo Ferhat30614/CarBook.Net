@@ -26,7 +26,7 @@ namespace CarBook.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBlogLike(CreateBlogLikeCommand createBlogLikeCommand)
+        public async Task<IActionResult> CreateBlogLike(CreateCommentLikeCommand createBlogLikeCommand)
         {
             await _mediator.Send(createBlogLikeCommand);
             return Ok("BlogLike Başarılıyla ekledi");

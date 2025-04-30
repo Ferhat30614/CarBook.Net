@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Commands.BlogLikeCommands
 {
-    public class CreateBlogLikeCommand:IRequest
+    public class CreateBlogLikeCommand : IRequest
     {
         public int AppUserID { get; set; }       
         public int BlogID { get; set; }
