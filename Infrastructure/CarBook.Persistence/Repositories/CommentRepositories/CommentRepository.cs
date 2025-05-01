@@ -71,6 +71,13 @@ namespace CarBook.Persistence.Repositories.CommentRepositories
             _context.SaveChanges();
 
         }
+
+        public int GetCountReplyByComment(int id)
+        {
+            return _context.Comments.Where(x => x.ParentCommentId == id).Count();
+        }
     }
 
 }
+
+
