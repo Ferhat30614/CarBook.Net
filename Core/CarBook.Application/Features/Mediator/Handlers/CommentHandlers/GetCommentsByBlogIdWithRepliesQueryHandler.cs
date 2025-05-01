@@ -1,4 +1,6 @@
 ﻿using CarBook.Application.Features.Mediator.Commands.CommentCommands;
+using CarBook.Application.Features.Mediator.Queries.CommentQueries;
+using CarBook.Application.Features.Mediator.Results.CommentResults;
 using CarBook.Application.Features.RepositoryPattern;
 using CarBook.Application.Interfaces;
 using CarBook.Domain.Entities;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Mediator.Handlers.CommentHandlers
 {
-    public class GetCommentsByBlogIdWithRepliesQueryHandler : IRequestHandler<CreateCommentCommand>
+    public class GetCommentsByBlogIdWithRepliesQueryHandler : IRequestHandler<GetCommentsByBlogIdWithRepliesQuery,List<GetCommentsByBlogIdWithRepliesQueryResult>>
     {
         private readonly IGenericRepository<Comment> _commentRepository;
 
@@ -20,19 +22,58 @@ namespace CarBook.Application.Features.Mediator.Handlers.CommentHandlers
             _commentRepository = commentRepository;
         }
 
-        public async Task Handle(CreateCommentCommand request, CancellationToken cancellationToken)
+        public async Task<List<GetCommentsByBlogIdWithRepliesQueryResult>> Handle(GetCommentsByBlogIdWithRepliesQuery request, CancellationToken cancellationToken)
         {
-            await _commentRepository.CreateAsync(new Comment
-            {
-                Name = request.Name,
-                CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString()),
-                BlogID = request.BlogID,
-                Description = request.Description,
-                Email = request.Email,
-                ParentCommentId = request.ParentCommentId,
 
 
-            });
+            var directComments=_commentRepository.GetDirectCommentsByBlogId(request.BlogId);
+
+
+
+            var result = directComments.Select(Comment => MapCommentWithReplies(Comment)).ToList(); 
+
+            return result;  
+
+
+            // _commentRepository.GetDirectCommentsByBlogId(request.BlogId).Select(a=> new GetCommentsByBlogIdWithRepliesQueryResult
+            //{
+            //    CommentID = a.CommentID,    
+            //    Name = a.Name,  
+            //    Description = a.Description,    
+            //    CreatedDate = a.CreatedDate,    
+            //    Replies =  _commentRepository.GetReplyCommentsByCommentId(a.CommentID).Select(b=> new GetCommentsByBlogIdWithRepliesQueryResult
+            //    {
+            //        CommentID = b.CommentID,
+            //        Name = b.Name,
+            //        Description = b.Description,
+            //        CreatedDate = b.CreatedDate,
+            //        Replies=new List<GetCommentsByBlogIdWithRepliesQueryResult> ()
+            //    }).ToList() 
+
+            //}).ToList();    
         }
+
+
+        private GetCommentsByBlogIdWithRepliesQueryResult MapCommentWithReplies(Comment comment)
+        {
+
+            return new GetCommentsByBlogIdWithRepliesQueryResult
+            {
+                CommentID = comment.CommentID,
+                Name = comment.Name,
+                Description = comment.Description,
+                CreatedDate = comment.CreatedDate,
+                Replies = _commentRepository.GetReplyCommentsByCommentId(comment.CommentID)
+                .Select(reply => MapCommentWithReplies(reply))
+                .ToList()
+
+
+
+            };
+
+
+
+        }
+
     }
 }
