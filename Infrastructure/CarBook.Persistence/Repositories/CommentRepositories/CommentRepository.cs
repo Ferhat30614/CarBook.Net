@@ -35,9 +35,12 @@ namespace CarBook.Persistence.Repositories.CommentRepositories
                 CreatedDate = x.CreatedDate,
                 Description = x.Description,
                 BlogID = x.BlogID,
+                ParentCommentId=x.ParentCommentId,
+                ReplyCount = x.ReplyCount,  
 
 
-            }).ToList();
+
+             }).ToList();
         }
 
         public Comment GetById(int id)
@@ -45,9 +48,9 @@ namespace CarBook.Persistence.Repositories.CommentRepositories
             return _context.Comments.Find(id);
         }
 
-        public List<Comment> GetCommentsByBlogId(int id)
+        public List<Comment> GetDirectCommentsByBlogId(int id)
         {
-           return _context.Set<Comment>().Where(x=>x.BlogID==id).ToList();
+           return _context.Set<Comment>().Where(x=>x.BlogID==id && x.ParentCommentId==null).ToList();
         }
 
         public int GetCountCommentByBlog(int id)

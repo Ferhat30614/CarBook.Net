@@ -45,9 +45,9 @@ namespace CarBook.WebApi.Controllers
         }
 
         [HttpPost("CreateComment")]
-        public IActionResult CreateComment(CreateCommentCommand comment)
+        public  async Task<IActionResult> CreateComment(CreateCommentCommand comment)
         {
-            _mediator.Send(comment);
+             await _mediator.Send(comment);
             return Ok("Yorum Başarıyla eklendi");
         }
 
@@ -66,10 +66,10 @@ namespace CarBook.WebApi.Controllers
             return Ok("yorum başarıyla silindi..");
         }
 
-        [HttpGet("GetCommentsByBlog")]
+        [HttpGet("GetDirectCommentsByBlog")]
         public IActionResult GetCommentsByBlog(int id)
         {
-            var values = _repository.GetCommentsByBlogId(id);   
+            var values = _repository.GetDirectCommentsByBlogId(id);   
             return Ok(values);
         }
         [HttpGet("GetCountCommentByBlog")]

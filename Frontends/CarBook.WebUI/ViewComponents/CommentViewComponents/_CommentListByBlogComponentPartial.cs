@@ -16,7 +16,7 @@ namespace CarBook.WebUI.ViewComponents.CommentViewComponents
         {
             ViewBag.v = id;
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7192/api/Comments/GetCommentsByBlog?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7192/api/Comments/GetDirectCommentsByBlog?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var dataJson = await responseMessage.Content.ReadAsStringAsync();

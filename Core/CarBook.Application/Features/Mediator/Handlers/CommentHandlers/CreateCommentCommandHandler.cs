@@ -28,6 +28,9 @@ namespace CarBook.Application.Features.Mediator.Handlers.CommentHandlers
                 BlogID=request.BlogID,  
                 Description=request.Description,
                 Email=request.Email, 
+                ParentCommentId=request.ParentCommentId,  
+                
+
             });
         }
     }

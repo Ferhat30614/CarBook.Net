@@ -9,12 +9,12 @@ namespace CarBook.Application.Features.RepositoryPattern
 {
     public interface IGenericRepository<T> where T : class
     {
-        List<Comment> GetAll();
+        List<T> GetAll();
         void Create(T entity);
         void Remove(T entity);
         void Update(T entity);
         T GetById(int id);
-        List<T> GetCommentsByBlogId(int id);
+        List<T> GetDirectCommentsByBlogId(int id);
         int GetCountCommentByBlog(int id);
     }
 }
