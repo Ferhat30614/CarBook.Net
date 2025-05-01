@@ -25,38 +25,15 @@ namespace CarBook.Application.Features.Mediator.Handlers.CommentHandlers
         public async Task<List<GetCommentsByBlogIdWithRepliesQueryResult>> Handle(GetCommentsByBlogIdWithRepliesQuery request, CancellationToken cancellationToken)
         {
 
-
             var directComments=_commentRepository.GetDirectCommentsByBlogId(request.BlogId);
-
-
 
             var result = directComments.Select(Comment => MapCommentWithReplies(Comment)).ToList(); 
 
             return result;  
-
-
-            // _commentRepository.GetDirectCommentsByBlogId(request.BlogId).Select(a=> new GetCommentsByBlogIdWithRepliesQueryResult
-            //{
-            //    CommentID = a.CommentID,    
-            //    Name = a.Name,  
-            //    Description = a.Description,    
-            //    CreatedDate = a.CreatedDate,    
-            //    Replies =  _commentRepository.GetReplyCommentsByCommentId(a.CommentID).Select(b=> new GetCommentsByBlogIdWithRepliesQueryResult
-            //    {
-            //        CommentID = b.CommentID,
-            //        Name = b.Name,
-            //        Description = b.Description,
-            //        CreatedDate = b.CreatedDate,
-            //        Replies=new List<GetCommentsByBlogIdWithRepliesQueryResult> ()
-            //    }).ToList() 
-
-            //}).ToList();    
         }
-
 
         private GetCommentsByBlogIdWithRepliesQueryResult MapCommentWithReplies(Comment comment)
         {
-
             return new GetCommentsByBlogIdWithRepliesQueryResult
             {
                 CommentID = comment.CommentID,
@@ -67,11 +44,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.CommentHandlers
                 .Select(reply => MapCommentWithReplies(reply))
                 .ToList()
 
-
-
             };
-
-
 
         }
 
