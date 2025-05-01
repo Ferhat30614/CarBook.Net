@@ -1,0 +1,61 @@
+﻿@model ResultCommentDto
+
+<li class="comment" style="margin-top: 10px;">
+    <div class="vcard bio">
+        <img src="~/carbook-master/images/person_1.jpg" alt="Image placeholder">
+    </div>
+    <div class="comment-body">
+        <h3>@Model.Name</h3>
+        <div class="meta">@(((DateTime)Model.CreatedDate).ToString("dd-MMM-yyyy"))</div>
+        <p>@Model.Description</p>
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+            @await Component.InvokeAsync("_CommentLikeDislikeComponentPartial", new { id = Model.CommentID })
+
+            <button class="btn btn-primary btn-sm" type="button" onclick="toggleReplyForm(@Model.CommentID)">Yanıtla</button>
+        </div>
+
+        <div id="reply-form-@Model.CommentID" style="display: none; margin-top:10px;">
+            @await Component.InvokeAsync("_CommentReplyComponentPartial", new { commentId = Model.CommentID })
+        </div>
+
+        @if (Model.Replies != null && Model.Replies.Count > 0)
+        {
+            <div style="margin-top: 10px; margin-left: 20px;">
+                <button class="btn btn-link" style="padding: 0;" type="button" onclick="toggleReplies(@Model.CommentID)">
+                    ▼ @Model.Replies.Count yanıt
+                </button>
+
+                <div id="replies-@Model.CommentID" style="display: none; margin-top:10px; margin-left:20px;">
+                    <ul class="comment-list">
+                        @foreach (var reply in Model.Replies)
+                        {
+                            @Html.Partial("_CommentItemPartial", reply)
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</li>
+
+
+<script>
+    function toggleReplyForm(commentId) {
+        var form = document.getElementById('reply-form-' + commentId);
+        if (form.style.display === "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+
+    function toggleReplies(commentId) {
+        var replies = document.getElementById('replies-' + commentId);
+        if (replies.style.display === "none") {
+            replies.style.display = "block";
+        } else {
+            replies.style.display = "none";
+        }
+    }
+</script>
