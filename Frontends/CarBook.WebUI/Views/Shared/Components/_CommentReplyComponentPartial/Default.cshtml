@@ -1,0 +1,11 @@
+﻿@model CreateReplyCommentDto 
+
+<form asp-controller="Comment" asp-action="AddReply" method="post">
+    <input type="hidden" asp-for="BlogID" />
+    <input type="hidden" asp-for="ParentCommentId" />
+
+    <div class="form-group">
+        <textarea asp-for="Description" class="form-control" placeholder="Yanıtınızı yazın..." rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success btn-sm mt-2">Gönder</button>
+</form>

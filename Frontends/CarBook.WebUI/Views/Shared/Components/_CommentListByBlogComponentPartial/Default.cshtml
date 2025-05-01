@@ -15,14 +15,38 @@
                 <div class="meta">@(((DateTime)item.CreatedDate).ToString("dd-MMM-yyyy"))</div>
                 <p>@item.Description</p>
 
-                @await Component.InvokeAsync("_CommentLikeDislikeComponentPartial", new { id =  item.CommentID})
+
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    @await Component.InvokeAsync("_CommentLikeDislikeComponentPartial", new { id = item.CommentID })
+
+                    <button class="btn btn-primary btn-sm" type="button" onclick="toggleReplyForm(@item.CommentID)">Yanıtla</button>
+                </div>
+
+
+                <div id="reply-form-@item.CommentID" style="display: none; margin-top:10px;">
+                    @await Component.InvokeAsync("_CommentReplyComponentPartial", new { commentId = item.CommentID })
+                </div>
+
 
                 
             </div>
         </li>
 
-
-
     }
 
 </ul>
+
+<script>
+
+    function toggleReplyForm(commentId) {
+        var form = document.getElementById('reply-form-' + commentId);
+        if (form.style.display === "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+
+</script>
+
