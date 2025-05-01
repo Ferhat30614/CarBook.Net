@@ -1,0 +1,50 @@
+﻿
+
+@model List<ResultReplyCommentDto>
+
+
+
+ 
+
+
+        @if (Model != null && Model.Count> 0)  // Replies = alt yorumlar
+        {
+            <div style="margin-top: 10px;">
+                <button class="btn btn-link" style="padding: 0;" type="button" onclick="toggleReplies(@ViewBag.CommentId)">
+                    ▼  5  yanıt
+                </button>
+
+                <div id="replies-@ViewBag.CommentId" style="display: none; margin-top:10px; margin-left:20px;">
+                    @foreach (var reply in Model)
+                    {
+                        <div style="border-left: 2px solid #ccc; padding-left: 10px; margin-bottom: 10px;">
+                            <h5>@reply.Name</h5>
+                            <div class="meta">@(((DateTime)reply.CreatedDate).ToString("dd-MMM-yyyy"))</div>
+                            <p>@reply.Description</p>
+
+                             
+
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+
+
+
+
+  
+
+
+
+<script>
+
+        function toggleReplies(commentId) {
+        var replies = document.getElementById('replies-' + commentId);
+        replies.style.display = (replies.style.display === "none") ? "block" : "none";
+                                }
+
+
+</script>
+

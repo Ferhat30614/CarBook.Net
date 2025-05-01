@@ -21,6 +21,7 @@
                     @await Component.InvokeAsync("_CommentLikeDislikeComponentPartial", new { id = item.CommentID })
 
                     <button class="btn btn-primary btn-sm" type="button" onclick="toggleReplyForm(@item.CommentID)">Yanıtla</button>
+
                 </div>
 
 
@@ -28,8 +29,16 @@
                     @await Component.InvokeAsync("_CommentReplyComponentPartial", new { commentId = item.CommentID })
                 </div>
 
+                @await Component.InvokeAsync("_CommentListResponseComponentPartial", new { commentId = item.CommentID })
 
-                
+
+
+
+
+
+
+
+
             </div>
         </li>
 
@@ -47,6 +56,10 @@
             form.style.display = "none";
         }
     }
+
+
+
+
 
 </script>
 
