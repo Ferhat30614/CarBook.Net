@@ -1,4 +1,5 @@
 ﻿using CarBook.Application.Features.Mediator.Commands.CommentCommands;
+using CarBook.Application.Features.Mediator.Queries.CommentQueries;
 using CarBook.Application.Features.RepositoryPattern;
 using CarBook.Domain.Entities;
 using CarBook.Persistence.Repositories;
@@ -66,11 +67,11 @@ namespace CarBook.WebApi.Controllers
             return Ok("yorum başarıyla silindi..");
         }
 
-        [HttpGet("GetDirectCommentsByBlog")]
-        public IActionResult GetDirectCommentsByBlog(int id)
+        [HttpGet("GetCommentsByBlogIdWithReplies")]
+        public async Task<IActionResult> GetCommentsByBlogIdWithReplies(int id)
         {
-            var values = _repository.GetDirectCommentsByBlogId(id);   
-            return Ok(values);
+            var values = await _mediator.Send(new GetCommentsByBlogIdWithRepliesQuery(id));
+            return Ok(values);  
         }
 
         [HttpGet("GetReplyCommentsByComment")]
