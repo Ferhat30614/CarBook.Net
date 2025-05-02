@@ -13,6 +13,7 @@ using CarBook.Application.Interfaces.CarFeatureInterfaces;
 using CarBook.Application.Interfaces.CarInterfaces;
 using CarBook.Application.Interfaces.CarPricingInterfaces;
 using CarBook.Application.Interfaces.CommentLikeInterfaces;
+using CarBook.Application.Interfaces.MessageInterfaces;
 using CarBook.Application.Interfaces.RentACarIntefaces;
 using CarBook.Application.Interfaces.ReviewInterfaces;
 using CarBook.Application.Interfaces.StatisticInterfaces;
@@ -29,6 +30,7 @@ using CarBook.Persistence.Repositories.CarPricingRepositories;
 using CarBook.Persistence.Repositories.CarRepositories;
 using CarBook.Persistence.Repositories.CommentLikeRepositories;
 using CarBook.Persistence.Repositories.CommentRepositories;
+using CarBook.Persistence.Repositories.MessageRepositories;
 using CarBook.Persistence.Repositories.RentACarRepositories;
 using CarBook.Persistence.Repositories.ReviewRepositories;
 using CarBook.Persistence.Repositories.StatisticRepositories;
@@ -90,6 +92,7 @@ builder.Services.AddScoped(typeof(ICarDescriptionRepository), typeof(CarDescript
 builder.Services.AddScoped(typeof(IReviewRepository), typeof(ReviewRepository));
 builder.Services.AddScoped(typeof(IBlogLikeRepository), typeof(BlogLikeRepository));
 builder.Services.AddScoped(typeof(ICommentLikeRepository), typeof(CommentLikeRepository));
+builder.Services.AddScoped(typeof(IMessageRepository), typeof(MessageRepository));
 
 
 
