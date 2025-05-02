@@ -10,5 +10,8 @@ namespace CarBook.Application.Interfaces.MessageInterfaces
     public interface IMessageRepository
     {
         void CreateMessage(Message message);
+        List<Message> GetMessageBySenderId(int senderId, int receiverId);
+        List<Message> GetMessageByCurrentUser(int CurrentUserId);
+
     }
 }

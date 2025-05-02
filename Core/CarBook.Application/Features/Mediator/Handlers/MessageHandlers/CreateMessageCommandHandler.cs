@@ -27,7 +27,8 @@ namespace CarBook.Application.Features.Mediator.Handlers.MessageHandlers
                 ReceiverID = request.ReceiverID,    
                 Content = request.Content,  
                 CreatedDate = DateTime.Now,  
-                ReadStatus= request.ReadStatus,     
+                ReadStatus= request.ReadStatus,  
+
 
             });
         }
