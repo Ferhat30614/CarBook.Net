@@ -48,6 +48,7 @@ namespace CarBook.Persistence.Context
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<BlogLike> BlogLikes { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,6 +62,20 @@ namespace CarBook.Persistence.Context
                 .HasOne(a => a.DropOffLocation)
                 .WithMany(b => b.DropOffReservation)
                 .HasForeignKey(c => c.DropOffLocationID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+
+
+            modelBuilder.Entity<Message>()
+                .HasOne(a => a.Sender)
+                .WithMany(b => b.SentMessages)
+                .HasForeignKey(c => c.SenderID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+            
+            modelBuilder.Entity<Message>()
+                .HasOne(a => a.Receiver)
+                .WithMany(b => b.ReceivedMessages)
+                .HasForeignKey(c => c.ReceiverID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
         }
 
