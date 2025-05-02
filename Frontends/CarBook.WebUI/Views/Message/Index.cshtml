@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@model List<ResultMessageByCurrentUserDto>
+
+<h2>Mesajlar</h2>
+<table class="table">
+    <tr>
+        <th>Gönderen</th>
+        <th>Alıcı</th>
+        <th>Mesaj</th>
+        <th>Zaman</th>
+        <th>Detaylar</th>
+    </tr>
+
+    @foreach (var message in Model)
+    {
+        <tr>
+            <td>@message.OtherUserName</td>
+          
+            <td>
+                @Html.ActionLink("Detaylar", "Details", new { id = message.MessageID })
+            </td>
+        </tr>
+    }
+</table>
