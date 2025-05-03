@@ -40,7 +40,8 @@ namespace CarBook.WebApi.Controllers
             return Ok(value);         
         
         }
-        [HttpPut]
+
+        [HttpGet("UpdateReadStatusBySender")]
         public async Task<IActionResult> UpdateReadStatusBySender(int senderId,int receiverId) { 
 
              await _mediator.Send(new UpdateReadStatusBySenderCommand(senderId,receiverId));     

@@ -53,6 +53,14 @@ namespace CarBook.WebUI.Controllers
             ViewBag.UserId=userId;
             ViewBag.OtherUserId = id;
 
+            //read status kodları
+
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync($"https://localhost:7192/api/Messages/UpdateReadStatusBySender?senderId={id}&receiverId={userId}");
+            
+
+            // mesajları getirme işlemleri
+
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"https://localhost:7192/api/Messages?senderId={id}&receiverId={userId}");
             if (responseMessage.IsSuccessStatusCode)
