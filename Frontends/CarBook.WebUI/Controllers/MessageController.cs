@@ -1,9 +1,11 @@
 ﻿using CarBook.Dto.BlogDtos;
 using CarBook.Dto.MessageDtos;
+using CarBook.Dto.ServiceDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NuGet.Protocol.Plugins;
 using System.Security.Claims;
+using System.Text;
 
 namespace CarBook.WebUI.Controllers
 {
@@ -61,25 +63,17 @@ namespace CarBook.WebUI.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> CreateMessage(int id)
+        public async Task<IActionResult> CreateMessage(CreateMessageDtos createMessageDtos)
         {
-            var claim = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier);
-            var userId = 0;
-
-            if (claim != null) {
-                userId = int.Parse(claim.Value);            
-            }
-
-            ViewBag.UserId=userId;
-            ViewBag.OtherUserId = id;
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7192/api/Messages?senderId={id}&receiverId={userId}");
+            var jsonData = JsonConvert.SerializeObject(createMessageDtos);
+            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7192/api/Messages", content);
             if (responseMessage.IsSuccessStatusCode)
             {
-                var dataJson = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultMessageDetailsDto>>(dataJson);
-                return View(values);
+                return RedirectToAction("MessageDetails", "Message", new { id=createMessageDtos.ReceiverID});
+
             }
             return View();
         }
