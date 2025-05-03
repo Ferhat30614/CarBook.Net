@@ -25,8 +25,10 @@ namespace CarBook.Application.Features.Mediator.Handlers.MessageHandlers
             {
                 MessageID = a.MessageID,        
                 CurrentUserID= request.CurrentUserID,   
-                OtherUserID= (request.CurrentUserID== a.SenderID) ? a.ReceiverID : a.SenderID,
-                OtherUserName= (request.CurrentUserID == a.SenderID) ? a.Receiver.Name : a.Sender.Name,
+                OtherUserID= a.OtherUserID,
+                OtherUserName= _messageRepository.GetUserNameByOtherUserId(a.OtherUserID),  
+                LastMessageDate= a.LastMessageDate, 
+                LastMessageContent= a.LastMessageContent,       
 
 
             }).ToList();    

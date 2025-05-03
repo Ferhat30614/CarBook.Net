@@ -1,4 +1,5 @@
-﻿using CarBook.Domain.Entities;
+﻿using CarBook.Application.Features.Mediator.Results.MessageResults;
+using CarBook.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace CarBook.Application.Interfaces.MessageInterfaces
     {
         void CreateMessage(Message message);
         List<Message> GetMessageBySenderId(int senderId, int receiverId);
-        List<Message> GetMessageByCurrentUser(int CurrentUserId);
+        List<GetMessageByCurrentUserIdQueryResult> GetMessageByCurrentUser(int CurrentUserId);
+        public string GetUserNameByOtherUserId(int OtherUserId);
+        
 
     }
 }

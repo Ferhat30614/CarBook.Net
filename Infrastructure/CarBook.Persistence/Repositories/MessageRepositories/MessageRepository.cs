@@ -40,6 +40,8 @@ namespace CarBook.Persistence.Repositories.MessageRepositories
         public List<GetMessageByCurrentUserIdQueryResult > GetMessageByCurrentUser(int CurrentUserId)
         {
             return _carBookContext.Messages
+                .Include(f=>f.Sender)
+                .Include(g=>g.Receiver)
                 .Where(a => a.SenderID == CurrentUserId || a.ReceiverID == CurrentUserId)
                 .GroupBy(b => new
                 {
@@ -52,13 +54,7 @@ namespace CarBook.Persistence.Repositories.MessageRepositories
                     .OrderByDescending(d => d.CreatedDate)
                     .Select(e => e.Content)
                     .FirstOrDefault()
-
                 }).ToList();
-
-
-
-
-
 
 
             //using (var context = new YourDbContext())
@@ -77,12 +73,18 @@ namespace CarBook.Persistence.Repositories.MessageRepositories
             //        .ToList();
             //}
 
-
-
-
-
-
-
         }
+
+
+        public string GetUserNameByOtherUserId(int OtherUserId) {
+
+
+            return _carBookContext.AppUsers
+                .Where(a => a.AppUserId == OtherUserId)
+                .Select(b => b.UserName)
+                .FirstOrDefault();
+        
+        }
+
     }
 }
