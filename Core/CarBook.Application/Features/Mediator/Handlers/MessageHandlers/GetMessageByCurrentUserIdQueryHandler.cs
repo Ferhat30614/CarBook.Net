@@ -27,7 +27,9 @@ namespace CarBook.Application.Features.Mediator.Handlers.MessageHandlers
                 OtherUserID= a.OtherUserID,
                 OtherUserName= _messageRepository.GetUserNameByOtherUserId(a.OtherUserID),  
                 LastMessageDate= a.LastMessageDate, 
-                LastMessageContent= a.LastMessageContent,       
+                LastMessageContent= a.LastMessageContent,   
+                NumberOfUnReadMessagesCount= _messageRepository.GetNumberOfUnReadMessagesBySenderId(a.OtherUserID,request.CurrentUserID)
+                
 
 
             }).ToList();    

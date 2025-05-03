@@ -15,6 +15,7 @@ namespace CarBook.Application.Interfaces.MessageInterfaces
         List<GetMessageByCurrentUserIdQueryResult> GetMessageByCurrentUser(int CurrentUserId);
         public string GetUserNameByOtherUserId(int OtherUserId);
         public void UpdateReadStatusBySender(int senderId,int receiverId);
+        public int GetNumberOfUnReadMessagesBySenderId(int senderId,int receiverId);
         
 
     }

@@ -83,5 +83,12 @@ namespace CarBook.Persistence.Repositories.MessageRepositories
 
             _carBookContext.SaveChanges(); 
         }
+
+        public int GetNumberOfUnReadMessagesBySenderId(int senderId, int receiverId)
+        {
+            return _carBookContext.Messages
+                .Where(a=>a.SenderID==senderId && a.ReceiverID==receiverId && a.ReadStatus==false)
+                .Count();   
+        }
     }
 }

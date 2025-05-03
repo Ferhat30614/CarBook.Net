@@ -14,6 +14,7 @@ namespace CarBook.Application.Features.Mediator.Results.MessageResults
         public string OtherUserName { get; set; }
         public DateTime LastMessageDate { get; set; }
         public string LastMessageContent { get; set; }
+        public int NumberOfUnReadMessagesCount { get; set; }
        
     }
 }
