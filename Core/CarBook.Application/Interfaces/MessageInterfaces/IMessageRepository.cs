@@ -14,6 +14,7 @@ namespace CarBook.Application.Interfaces.MessageInterfaces
         List<Message> GetMessageBySenderId(int senderId, int receiverId);
         List<GetMessageByCurrentUserIdQueryResult> GetMessageByCurrentUser(int CurrentUserId);
         public string GetUserNameByOtherUserId(int OtherUserId);
+        public void UpdateReadStatusBySender(int senderId,int receiverId);
         
 
     }

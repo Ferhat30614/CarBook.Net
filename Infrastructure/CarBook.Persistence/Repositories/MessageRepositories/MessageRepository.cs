@@ -56,24 +56,6 @@ namespace CarBook.Persistence.Repositories.MessageRepositories
                     .Select(e => e.Content)
                     .FirstOrDefault()
                 }).ToList();
-
-
-            //using (var context = new YourDbContext())
-            //{
-            //    var result = context.Messages
-            //        .Where(m => m.SenderID == CurrentUserId || m.ReceiverID == CurrentUserId)
-            //        .GroupBy(m => new
-            //        {
-            //            UserID = m.SenderID == CurrentUserId ? m.ReceiverID : m.SenderID
-            //        })
-            //        .Select(g => new
-            //        {
-            //            UserID = g.Key.UserID,
-            //            LastMessageDate = g.Max(m => m.CreatedDate)
-            //        })
-            //        .ToList();
-            //}
-
         }
 
 
@@ -87,5 +69,19 @@ namespace CarBook.Persistence.Repositories.MessageRepositories
         
         }
 
+        public void UpdateReadStatusBySender(int senderId, int receiverId)
+        {
+            var values=_carBookContext.Messages
+                .Where(a=>a.SenderID==senderId && a.ReceiverID==receiverId && a.ReadStatus==false )
+                .ToList();
+
+            foreach (var value in values) { 
+            
+                value.ReadStatus = true;
+                _carBookContext.Messages.Update(value);
+            }
+
+            _carBookContext.SaveChanges(); 
+        }
     }
 }

@@ -11,5 +11,11 @@ namespace CarBook.Application.Features.Mediator.Commands.MessageCommands
     {
         public int SenderId { get; set; }
         public int ReceiverId { get; set; }
+
+        public UpdateReadStatusBySenderCommand(int senderId, int receiverId)
+        {
+            SenderId = senderId;
+            ReceiverId = receiverId;
+        }
     }
 }

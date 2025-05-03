@@ -18,9 +18,9 @@ namespace CarBook.Application.Features.Mediator.Handlers.MessageHandlers
             _messageRepository = messageRepository;
         }
 
-        public Task Handle(UpdateReadStatusBySenderCommand request, CancellationToken cancellationToken)
+        public async  Task Handle(UpdateReadStatusBySenderCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            _messageRepository.UpdateReadStatusBySender(request.SenderId, request.ReceiverId);
         }
     }
 }

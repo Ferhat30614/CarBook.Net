@@ -40,5 +40,12 @@ namespace CarBook.WebApi.Controllers
             return Ok(value);         
         
         }
+        [HttpPut]
+        public async Task<IActionResult> UpdateReadStatusBySender(int senderId,int receiverId) { 
+
+             await _mediator.Send(new UpdateReadStatusBySenderCommand(senderId,receiverId));     
+            return Ok("Başarıyla read değerleri true yapıldı");         
+        
+        }
     }
 }
