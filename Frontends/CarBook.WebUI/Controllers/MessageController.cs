@@ -17,6 +17,8 @@ namespace CarBook.WebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
+
+
         public async Task<IActionResult> Index()
         {
             var claim = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier);

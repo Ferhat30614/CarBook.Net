@@ -1,57 +1,141 @@
-﻿
-@{
-    ViewData["Title"] = "MessageDetails";
-    Layout = "~/Views/UILayout/Index.cshtml";
+﻿@{
+    ViewData["Title"] = "MessageDetails";   
+    Layout = null;
 }
 
 @model List<ResultMessageDetailsDto>
 
 
-
-<div class="table-responsive w-75 mx-auto mt-4">
-    <table class="table table-bordered table-hover text-center">
-        <thead class="table-dark">
-            <tr>
-
-                <th>MessageID</th>
-                <th>SenderID</th>
-                <th>ReceiverID</th>
-                <th>Content</th>
-                <th>ReadStatus</th>
-                <th>CreatedDate</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var message in Model)
-            {
-                <tr>
-                    <td>@message.MessageID</td>
-                    <td>@message.SenderID</td>
-                    <td>@message.ReceiverID</td>
-                    <td>@message.Content</td>
-                    <td>@message.ReadStatus</td>
-                    <td>@message.CreatedDate</td>
-
-                    
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="user-info">
+    <div class="user-photo">
+        
+        <img src="/carbook-master/images/person_1.jpg" alt="Kullanıcı Adı">
+    </div>
+    <div class="user-details">
+        <h4>@Model[0].OtherUserName</h4>
+        <p>Mesajlaşılan kişi</p>
+    </div>
 </div>
 
+<div class="message-container">
+    <div class="messages">
+        @foreach (var message in Model)
+        {
+            <div class="message @((message.SenderID == @ViewBag.UserId) ? "sent" : "received")">
+                <div class="message-content">
+                    <p>@message.Content</p>
+                    <span class="message-time">@message.CreatedDate.ToString("HH:mm")</span>
+                </div>
+            </div>
+        }
+    </div>
 
-<form asp-controller="Message" asp-action="CreateMessage" method="post">
-    
+    <form asp-controller="Message" asp-action="CreateMessage" method="post" class="message-form">
+        <input type="hidden" name="ReceiverId" value="@ViewBag.OtherUserId" />
+        <input type="hidden" name="SenderID" value="@ViewBag.UserId" />
+        <textarea name="Content" class="form-control" placeholder="Yanıtınızı yazın..." rows="3"></textarea>
+        <button type="submit" class="btn btn-success btn-sm mt-2">Gönder</button>
+    </form>
+</div>
+
+<style>
    
-    <input type="hidden" name="ReceiverId" value="@ViewBag.OtherUserId" />
-    <input type="hidden" name="SenderID" value="@ViewBag.UserId" />
-    <textarea  name="Content" class="form-control" placeholder="Yanıtınızı yazın..." rows="3"></textarea>
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        position: fixed;
+        top: 10px;
+        left: 20px;
+        z-index: 1000;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-    <button type="submit" class="btn btn-success btn-sm mt-2">Gönder</button>
+    .user-photo img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-top: 5px;
+    }
+
+    .user-details h4 {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .user-details p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #888;
+    }
+
+    .message-container {
+        max-width: 800px;
+        margin: 120px auto 20px;
+        padding: 10px;
+    }
+
+    .messages {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .message {
+        display: flex;
+        max-width: 70%;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+    }
+
+        .message.sent {
+            align-self: flex-end;
+            background-color: #dcf8c6;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .message.received {
+            align-self: flex-start;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+    .message-content p {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .message-time {
+        font-size: 12px;
+        color: #888;
+        display: block;
+        margin-top: 5px;
+    }
+
+    .message-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+        .message-form textarea {
+            resize: none;
+        }
+
+        .message-form button {
+            align-self: flex-end;
+        }
 
 
 
-</form>
-
-
-
+</style>

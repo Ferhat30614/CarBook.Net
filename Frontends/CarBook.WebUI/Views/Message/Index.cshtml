@@ -1,39 +1,35 @@
 ﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
-    
+
+
+
+
 }
 
+
+
+
 @model List<ResultMessageByCurrentUserDto>
- 
-<div class="table-responsive w-75 mx-auto mt-4">
-    <table class="table table-bordered table-hover text-center">
-        <thead class="table-dark">
-            <tr>
 
-                <th>CurrentUserID</th>
-                <th>OtherUserID</th>
-                <th>OtherUserName</th>
-                <th>LastMessageDate</th>
-                <th>LastMessageContent</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var message in Model)
-            {
-                <tr>
-                    <td>@message.CurrentUserID</td>
-                    <td>@message.OtherUserID</td>
-                    <td>@message.OtherUserName</td>
-                    <td>@message.LastMessageDate</td>
-                    <td>@message.LastMessageContent</td>
-
-                    <td>
-                        <a href="/Message/MessageDetails/@message.OtherUserID">Mesaj Detayları</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="user-messages-container">
+    @foreach (var message in Model)
+    {
+        <a href="/Message/MessageDetails/@message.OtherUserID" class="user-message-link">
+            <div class="user-message">
+                <div class="user-photo">
+                    <img src="/carbook-master/images/person_1.jpg" alt="@message.OtherUserName">
+                </div>
+                <div class="user-details">
+                    <h4>@message.OtherUserName</h4>
+                    <p>@message.LastMessageContent</p>
+                    <span class="message-date">@message.LastMessageDate</span>
+                </div>
+                <div class="view-details">
+                    <span>Mesaj Detayları</span>
+                </div>
+            </div>
+        </a>
+    }
 </div>
 

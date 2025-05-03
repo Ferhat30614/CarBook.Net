@@ -1,6 +1,9 @@
 ﻿using CarBook.Application.Features.Mediator.Queries.MessageQueries;
 using CarBook.Application.Features.Mediator.Results.MessageResults;
+using CarBook.Application.Interfaces;
+using CarBook.Application.Interfaces.AppUserInterfaces;
 using CarBook.Application.Interfaces.MessageInterfaces;
+using CarBook.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,13 +16,18 @@ namespace CarBook.Application.Features.Mediator.Handlers.MessageHandlers
     public class GetMessageBySenderIdQueryHandler : IRequestHandler<GetMessageBySenderIdQuery, List<GetMessageBySenderIdQueryResult>>
     {
         private readonly IMessageRepository _messageRepository;
+        private readonly IRepository<AppUser> _appUserRepository;
 
-        public GetMessageBySenderIdQueryHandler(IMessageRepository messageRepository)
+        public GetMessageBySenderIdQueryHandler(IMessageRepository messageRepository, IRepository<AppUser> appUserRepository)
         {
             _messageRepository = messageRepository;
+            _appUserRepository = appUserRepository;
         }
+
         public async Task<List<GetMessageBySenderIdQueryResult>> Handle(GetMessageBySenderIdQuery request, CancellationToken cancellationToken)
         {
+            var OtherUser = await _appUserRepository.GetByIdAsync(request.SenderId);
+
             return _messageRepository.GetMessageBySenderId(request.SenderId, request.ReceiverId).Select(a => new GetMessageBySenderIdQueryResult
             {
                 SenderID=a.SenderID,    
@@ -28,6 +36,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.MessageHandlers
                 CreatedDate=a.CreatedDate,  
                 ReadStatus=a.ReadStatus, 
                 MessageID=a.MessageID,  
+                OtherUserName=  OtherUser.UserName
 
             }).ToList();
         }
