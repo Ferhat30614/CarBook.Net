@@ -13,6 +13,8 @@ namespace CarBook.Application.Features.Mediator.Results.MessageResults
         public int CurrentUserID { get; set; }
         public int OtherUserID { get; set; }
         public string OtherUserName { get; set; }
+        public DateTime LastMessageDate { get; set; }
+        public string LastMessageContent { get; set; }
        
     }
 }

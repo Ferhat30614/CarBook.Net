@@ -1,9 +1,12 @@
-﻿using CarBook.Application.Interfaces.MessageInterfaces;
+﻿using CarBook.Application.Features.Mediator.Queries.MessageQueries;
+using CarBook.Application.Features.Mediator.Results.MessageResults;
+using CarBook.Application.Interfaces.MessageInterfaces;
 using CarBook.Domain.Entities;
 using CarBook.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,13 +37,52 @@ namespace CarBook.Persistence.Repositories.MessageRepositories
 
         }
 
-        public List<Message> GetMessageByCurrentUser(int CurrentUserId)
+        public List<GetMessageByCurrentUserIdQueryResult > GetMessageByCurrentUser(int CurrentUserId)
         {
             return _carBookContext.Messages
-                .Include(b => b.Sender)
-                .Include(c => c.Receiver)
                 .Where(a => a.SenderID == CurrentUserId || a.ReceiverID == CurrentUserId)
-                .ToList();
+                .GroupBy(b => new
+                {
+                    OtherUserId = (b.SenderID == CurrentUserId) ? b.ReceiverID : b.SenderID,
+                }).Select(b => new GetMessageByCurrentUserIdQueryResult
+                {
+                    OtherUserID = b.Key.OtherUserId,
+                    LastMessageDate = b.Max(c => c.CreatedDate),
+                    LastMessageContent = b
+                    .OrderByDescending(d => d.CreatedDate)
+                    .Select(e => e.Content)
+                    .FirstOrDefault()
+
+                }).ToList();
+
+
+
+
+
+
+
+            //using (var context = new YourDbContext())
+            //{
+            //    var result = context.Messages
+            //        .Where(m => m.SenderID == CurrentUserId || m.ReceiverID == CurrentUserId)
+            //        .GroupBy(m => new
+            //        {
+            //            UserID = m.SenderID == CurrentUserId ? m.ReceiverID : m.SenderID
+            //        })
+            //        .Select(g => new
+            //        {
+            //            UserID = g.Key.UserID,
+            //            LastMessageDate = g.Max(m => m.CreatedDate)
+            //        })
+            //        .ToList();
+            //}
+
+
+
+
+
+
+
         }
     }
 }
