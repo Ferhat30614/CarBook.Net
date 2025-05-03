@@ -36,7 +36,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.MessageHandlers
                 CreatedDate=a.CreatedDate,  
                 ReadStatus=a.ReadStatus, 
                 MessageID=a.MessageID,  
-                OtherUserName=  OtherUser.UserName
+                OtherUserName=  OtherUser.UserName, 
 
             }).ToList();
         }
