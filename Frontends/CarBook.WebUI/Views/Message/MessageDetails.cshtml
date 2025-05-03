@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "MessageDetails";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+@model List<ResultMessageDetailsDto>
+
+
+
+<div class="table-responsive w-75 mx-auto mt-4">
+    <table class="table table-bordered table-hover text-center">
+        <thead class="table-dark">
+            <tr>
+
+                <th>MessageID</th>
+                <th>SenderID</th>
+                <th>ReceiverID</th>
+                <th>Content</th>
+                <th>ReadStatus</th>
+                <th>CreatedDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var message in Model)
+            {
+                <tr>
+                    <td>@message.MessageID</td>
+                    <td>@message.SenderID</td>
+                    <td>@message.ReceiverID</td>
+                    <td>@message.Content</td>
+                    <td>@message.ReadStatus</td>
+                    <td>@message.CreatedDate</td>
+
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<form asp-controller="Message" asp-action="CreateMessage" method="post">
+    
+   
+    <input type="hidden" name="ReceiverId" value="@ViewBag.OtherUserId" />
+    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+    <textarea  name="Content" class="form-control" placeholder="Yanıtınızı yazın..." rows="3"></textarea>
+
+    <button type="submit" class="btn btn-success btn-sm mt-2">Gönder</button>
+
+
+
+</form>
+
+
+

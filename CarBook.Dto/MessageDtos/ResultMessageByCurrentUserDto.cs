@@ -8,9 +8,10 @@ namespace CarBook.Dto.MessageDtos
 {
     public class ResultMessageByCurrentUserDto
     {
-        public int MessageID { get; set; }
         public int CurrentUserID { get; set; }
         public int OtherUserID { get; set; }
         public string OtherUserName { get; set; }
+        public DateTime LastMessageDate { get; set; }
+        public string LastMessageContent { get; set; }
     }
 }

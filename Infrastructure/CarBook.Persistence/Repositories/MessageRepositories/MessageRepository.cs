@@ -32,6 +32,7 @@ namespace CarBook.Persistence.Repositories.MessageRepositories
         {
             var value=_carBookContext.Messages
                 .Where(a=>(a.SenderID==senderId && a.ReceiverID==receiverId) || (a.SenderID == receiverId && a.ReceiverID == senderId)  )
+                .OrderBy(a=>a.CreatedDate)
                 .ToList();
             return value;
 

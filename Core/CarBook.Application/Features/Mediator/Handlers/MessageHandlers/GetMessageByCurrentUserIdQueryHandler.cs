@@ -22,8 +22,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.MessageHandlers
         public async Task<List<GetMessageByCurrentUserIdQueryResult>> Handle(GetMessageByCurrentUserIdQuery request, CancellationToken cancellationToken)
         {
             return _messageRepository.GetMessageByCurrentUser(request.CurrentUserID).Select(a=> new GetMessageByCurrentUserIdQueryResult
-            {
-                MessageID = a.MessageID,        
+            {      
                 CurrentUserID= request.CurrentUserID,   
                 OtherUserID= a.OtherUserID,
                 OtherUserName= _messageRepository.GetUserNameByOtherUserId(a.OtherUserID),  
