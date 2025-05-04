@@ -16,6 +16,6 @@ namespace CarBook.Application.Features.Mediator.Results.MessageResults
         public bool ReadStatus { get; set; }
         public string OtherUserName { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }

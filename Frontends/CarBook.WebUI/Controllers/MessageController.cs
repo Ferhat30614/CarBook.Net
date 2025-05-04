@@ -50,7 +50,7 @@ namespace CarBook.WebUI.Controllers
                 userId = int.Parse(claim.Value);            
             }
 
-            ViewBag.UserId=userId;
+            ViewBag.UserId=userId;  //bunu düzenlemen gerekebilşri
             ViewBag.OtherUserId = id;
 
             //read status kodları

@@ -8,7 +8,7 @@
 
 <div class="user-info">
     <div class="user-photo">
-        
+
         <img src="/carbook-master/images/person_1.jpg" alt="Kullanıcı Adı">
     </div>
     <div class="user-details">
@@ -19,17 +19,25 @@
 
 <div class="message-container">
     <div class="messages">
-        @foreach (var message in Model)
+        @if (Model.Count > 0 && Model[0].SenderID != 0)
         {
-            <div class="message @((message.SenderID == @ViewBag.UserId) ? "sent" : "received")">
-                <div class="message-content">
-                    <p>@message.Content</p>
-                    <span class="message-time">@message.CreatedDate.ToString("HH:mm")</span>
+            @foreach (var message in Model)
+            {
+                <div class="message @((message.SenderID == @ViewBag.UserId) ? "sent" : "received")">
+                    <div class="message-content">
+                        <p>@message.Content</p>
+                        <span class="message-time">@message.CreatedDate.Value.ToString("HH:mm")</span>
+                    </div>
                 </div>
+            }
+        }
+        else
+        {
+            <div class="no-message">
+                <p>Henüz mesaj yok.</p>
             </div>
         }
     </div>
-
     <form asp-controller="Message" asp-action="CreateMessage" method="post" class="message-form">
         <input type="hidden" name="ReceiverId" value="@ViewBag.OtherUserId" />
         <input type="hidden" name="SenderID" value="@ViewBag.UserId" />
@@ -38,8 +46,9 @@
     </form>
 </div>
 
+
+
 <style>
-   
     .user-info {
         display: flex;
         align-items: center;
@@ -85,6 +94,16 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
+    }
+
+    .no-message {
+        text-align: center;
+        font-size: 16px;
+        color: #888;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        border: 1px dashed #ddd;
     }
 
     .message {
@@ -135,7 +154,5 @@
         .message-form button {
             align-self: flex-end;
         }
-
-
 
 </style>
