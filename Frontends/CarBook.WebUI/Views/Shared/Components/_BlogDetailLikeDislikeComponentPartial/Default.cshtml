@@ -1,5 +1,13 @@
 ﻿@model ResultBlogLikeDto
 
+
+
+@section Scripts{
+
+
+}
+
+
 <form asp-controller="BlogLike" asp-action="BlogLikeDislike" method="post">
 
     <input type="hidden" name="BlogID" value="@Model.BlogID" />
