@@ -33,6 +33,7 @@ namespace CarBook.WebUI.ViewComponents.BlogViewComponents
             {
                 var dataJson = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<ResultBlogLikeDto>(dataJson);
+                values!.UserID = userId; 
                 return View(values);
 
             }

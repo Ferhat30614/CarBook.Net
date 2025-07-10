@@ -35,6 +35,22 @@
 
     $("#btn-like").click(function () {
 
+        const BlogId = document.getElementById("#blog-id").value;
+        const UserId = document.getElementById("#user-id").value;
+        const UserVote = true;
+
+
+
+        
+
+    })
+
+
+    $("#btn-dislike").click(function () {
+
+        const BlogId = document.getElementById("#blog-id").value;
+        const UserId = document.getElementById("#user-id").value;
+        const UserVote = false;
 
 
         

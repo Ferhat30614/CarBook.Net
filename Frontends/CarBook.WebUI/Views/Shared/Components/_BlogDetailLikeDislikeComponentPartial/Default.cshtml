@@ -17,7 +17,8 @@
 
 <form asp-controller="BlogLike" asp-action="BlogLikeDislike" method="post">
 
-    <input  type="hidden" name="BlogID" value="@Model.BlogID" />
+    <input  type="hidden" name="BlogID" value="@Model.BlogID" id="#blog-id" />
+    <input type="hidden" name="UserID" value="@Model.UserID" id="#user-id" />
 
     <button id="#btn-like" type="submit" name="IsLike" value="true" class="btn @(Model.UserVote==true ? "btn-success" : "btn-outline-success")">
         👍 @Model.LikeCount  </button>
