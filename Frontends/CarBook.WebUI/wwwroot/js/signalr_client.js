@@ -8,6 +8,10 @@
 
 
 
+
+
+
+
     async function start() {
 
         try {
@@ -33,11 +37,32 @@
 
 
 
+
+    connection.on("ReceiveBlogLikeDislike", (BlogId, UserId, UserVote) => {
+
+
+        console.log("değer bu şekilde olur    " + BlogId);
+
+    });
+
+
+
+
+
     $("#btn-like").click(function () {
 
-        const BlogId = document.getElementById("#blog-id").value;
-        const UserId = document.getElementById("#user-id").value;
-        const UserVote = true;
+        const BlogId = parseInt(document.getElementById("blog-id").value);
+        const UserId = parseInt(document.getElementById("user-id").value);
+        const UserVote = true; // veya false
+
+
+        console.log(BlogId);
+        console.log(UserId);
+        console.log(UserVote);
+
+        connection.invoke("BlogLikeDislike", BlogId, UserId, UserVote).catch(function (err) {
+            console.error(err.toString());
+        });
 
 
 
@@ -51,15 +76,26 @@
 
     $("#btn-dislike").click(function () {
 
-        const BlogId = document.getElementById("#blog-id").value;
-        const UserId = document.getElementById("#user-id").value;
-        const UserVote = false;
+        const BlogId = parseInt(document.getElementById("blog-id").value);
+        const UserId = parseInt(document.getElementById("user-id").value);
+        const UserVote = false; // veya false
+
+
+        console.log(BlogId);
+        console.log(UserId);
+        console.log(UserVote);
+
+
+
+
+        connection.invoke("BlogLikeDislike", BlogId, UserId, UserVote).catch(function (err) {
+            console.error(err.toString());
+        });
 
 
         
 
     })
-
 
 
 

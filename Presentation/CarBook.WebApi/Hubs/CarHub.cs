@@ -37,31 +37,44 @@ namespace CarBook.WebApi.Hubs
         {
 
 
-            var createBlogLikeModel = new CreateBlogLikeModel
+
+            try
             {
-                AppUserID = UserId,
-                BlogID = BlogId,
-                IsLike = UserVote,
-            };
+                var createBlogLikeModel = new CreateBlogLikeModel
+                {
+                    AppUserID = UserId,
+                    BlogID = BlogId,
+                    IsLike = UserVote,
+                };
 
 
 
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createBlogLikeModel);
-            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7192/api/BlogLikes", content);
+                var client = _httpClientFactory.CreateClient();
+                var jsonData = JsonConvert.SerializeObject(createBlogLikeModel);
+                StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                var responseMessage = await client.PostAsync("https://localhost:7192/api/BlogLikes", content);
 
 
 
 
-            var client2 = _httpClientFactory.CreateClient();
-            var responseMessage2 = await client.GetAsync($"https://localhost:7192/api/BlogLikes?id={BlogId}&AppUserId={UserId}");
-            
-            var dataJson = await responseMessage2.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<ResultBlogLikeModel>(dataJson);
+                var client2 = _httpClientFactory.CreateClient();
+                var responseMessage2 = await client.GetAsync($"https://localhost:7192/api/BlogLikes?id={BlogId}&AppUserId={UserId}");
+
+                var dataJson = await responseMessage2.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<ResultBlogLikeModel>(dataJson);
 
 
-            await Clients.All.SendAsync("ReceiveBlogLikeDislike",values); 
+                await Clients.All.SendAsync("ReceiveBlogLikeDislike", BlogId, UserId, values!.UserVote);
+            }
+            catch (Exception ex)
+            {
+                // Hata detayını logla
+                Console.WriteLine($"Error in BlogLikeDislike: {ex.Message}\n{ex.StackTrace}");
+                throw;
+            }
+
+
+           
             
         }
 

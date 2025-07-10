@@ -17,13 +17,13 @@
 
 <form asp-controller="BlogLike" asp-action="BlogLikeDislike" method="post">
 
-    <input  type="hidden" name="BlogID" value="@Model.BlogID" id="#blog-id" />
-    <input type="hidden" name="UserID" value="@Model.UserID" id="#user-id" />
+    <input  type="hidden" name="BlogID" value=@Model.BlogID id="blog-id" />
+    <input type="hidden" name="UserID" value=@Model.UserID id="user-id" />
 
-    <button id="#btn-like" type="submit" name="IsLike" value="true" class="btn @(Model.UserVote==true ? "btn-success" : "btn-outline-success")">
+    <button id="btn-like" type="button" name="IsLike" value=true class="btn @(Model.UserVote==true ? "btn-success" : "btn-outline-success")">
         👍 @Model.LikeCount  </button>
 
-    <button id="#btn-dislike" type="submit" name="IsLike" value="false" class="btn @(Model.UserVote==false ? "btn-danger" : "btn-outline-danger")">
+    <button id="btn-dislike" type="button" name="IsLike" value=false class="btn @(Model.UserVote==false ? "btn-danger" : "btn-outline-danger")">
         👎 @Model.DislikeCount</button>
 
 
