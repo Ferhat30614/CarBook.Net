@@ -2,7 +2,7 @@
 
 
 
-    const connection = new signalR.HubConnectionBuilder().withUrl("/exampleTypeSafeHub")
+    const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7192/carhub")
         .configureLogging(signalR.LogLevel.Information).build();
 
 
@@ -30,6 +30,20 @@
     });
 
     start();
+
+
+
+    $("#btn-like").click(function () {
+
+
+
+        
+
+    })
+
+
+
+
 
 
 

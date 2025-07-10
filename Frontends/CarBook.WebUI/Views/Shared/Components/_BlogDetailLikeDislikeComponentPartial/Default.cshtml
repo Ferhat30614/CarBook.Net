@@ -4,6 +4,9 @@
 
 
 
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/signalR/signalr.min.js"></script>
+
 <script src="~/js/signalr_client.js"></script>
 
 
@@ -14,11 +17,12 @@
 
 <form asp-controller="BlogLike" asp-action="BlogLikeDislike" method="post">
 
-    <input type="hidden" name="BlogID" value="@Model.BlogID" />
-    <button type="submit" name="IsLike" value="true" class="btn @(Model.UserVote==true ? "btn-success" : "btn-outline-success")">
+    <input  type="hidden" name="BlogID" value="@Model.BlogID" />
+
+    <button id="#btn-like" type="submit" name="IsLike" value="true" class="btn @(Model.UserVote==true ? "btn-success" : "btn-outline-success")">
         👍 @Model.LikeCount  </button>
 
-    <button type="submit" name="IsLike" value="false" class="btn @(Model.UserVote==false ? "btn-danger" : "btn-outline-danger")">
+    <button id="#btn-dislike" type="submit" name="IsLike" value="false" class="btn @(Model.UserVote==false ? "btn-danger" : "btn-outline-danger")">
         👎 @Model.DislikeCount</button>
 
 
