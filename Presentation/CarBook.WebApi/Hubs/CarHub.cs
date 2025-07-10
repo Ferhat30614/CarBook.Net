@@ -38,8 +38,6 @@ namespace CarBook.WebApi.Hubs
 
 
 
-            try
-            {
                 var createBlogLikeModel = new CreateBlogLikeModel
                 {
                     AppUserID = UserId,
@@ -65,13 +63,10 @@ namespace CarBook.WebApi.Hubs
 
 
                 await Clients.All.SendAsync("ReceiveBlogLikeDislike", BlogId, UserId, values!.UserVote);
-            }
-            catch (Exception ex)
-            {
-                // Hata detayını logla
-                Console.WriteLine($"Error in BlogLikeDislike: {ex.Message}\n{ex.StackTrace}");
-                throw;
-            }
+            
+               
+               
+          
 
 
            
