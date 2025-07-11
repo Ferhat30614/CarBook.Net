@@ -2,16 +2,23 @@
 
 
 
+
+    const token = getCookie("CarBookJwt");
+
     const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7192/carhub",
         {
             /*withCredentials=true  // BU SATIR OLMAZSA COOKIE GİTMEZ*/
-        }).configureLogging(signalR.LogLevel.Information).build();
+            accessTokenFactory: () => token   // burdan jwt ı gönderiyorum ve query string olarak gönderiyorum
+        }).configureLogging(signalR.LogLevel.Information)
+        .build();
 
 
-
-
-
-
+//    "query string" nedir
+//        Bir URL'nin sonuna ? ile başlayan ek parametreler kısmıdır. Örnek:
+//    https://localhost:5001/carhub?access_token=eyJhbGciOi...
+//    Burada:
+//  ? → Query string başlatır.
+//        access_token =... → Bu senin JWT token’ını taşıyan parametredir.
 
 
     async function start() {
@@ -169,12 +176,6 @@
 
     })
 
-
-
-
-
-
-   
 
 
 })
