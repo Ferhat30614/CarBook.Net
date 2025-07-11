@@ -38,12 +38,14 @@
 
 
 
-    connection.on("ReceiveBlogLikeDislike", (BlogId, UserId, UserVote) => {
+    connection.on("ReceiveBlogLikeDislike", (BlogId, UserId, UserVote,likeCount,disikeCount) => {
 
 
         console.log("değer bu şekilde olur    " + BlogId);
         console.log("değer bu şekilde olur    " + UserId);
         console.log("değer bu şekilde olur    " + UserVote);
+        console.log("değer bu şekilde olur    " + likeCount);
+        console.log("değer bu şekilde olur    " + disikeCount);
 
         const btnLike = $("#btn-like");
         const btnDislike = $("#btn-dislike");
@@ -67,6 +69,8 @@
         }
 
 
+        btnLike.text("👍 " + likeCount);
+        btnDislike.text("👎 " + disikeCount);
 
 
 
@@ -82,6 +86,13 @@
 
         const BlogId = parseInt(document.getElementById("blog-id").value);
         const UserId = parseInt(document.getElementById("user-id").value);
+
+        if (UserId == 0) {
+
+            window.location.href = "/Login/Index";  // eğer kullanıcı oturum açmadıysa beğeni işlemi yapamaz.Burda sayfa yönlendirdim.
+
+
+        }
         const UserVote = true; 
 
 
@@ -108,6 +119,11 @@
         const BlogId = parseInt(document.getElementById("blog-id").value);
         const UserId = parseInt(document.getElementById("user-id").value);
         const UserVote = false; 
+
+
+        if (UserId == 0) {
+            window.location.href = "/Login/Index";
+        }
 
 
         console.log(BlogId);

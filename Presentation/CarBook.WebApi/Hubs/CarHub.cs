@@ -62,7 +62,8 @@ namespace CarBook.WebApi.Hubs
                 var values = JsonConvert.DeserializeObject<ResultBlogLikeModel>(dataJson);
 
 
-                await Clients.All.SendAsync("ReceiveBlogLikeDislike", BlogId, UserId, values!.UserVote);
+                await Clients.All.SendAsync("ReceiveBlogLikeDislike", BlogId,values.LikeCount,values.DislikeCount);
+                await Clients.User(userId:UserId.ToString()).SendAsync("ReceiveBlogLikeDislike",UserId, values!.UserVote);
             
                
                
