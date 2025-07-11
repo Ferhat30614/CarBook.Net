@@ -32,7 +32,6 @@ namespace CarBook.WebUI.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index","Login");
-
             }
             return View();
         }

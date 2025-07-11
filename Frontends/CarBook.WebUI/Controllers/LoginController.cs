@@ -40,7 +40,7 @@ namespace CarBook.WebUI.Controllers
                 var dataJson=await response.Content.ReadAsStringAsync();
                 var tokenModel = JsonSerializer.Deserialize<JwtResponseModel>(dataJson,new JsonSerializerOptions
                 {
-                    PropertyNamingPolicy=JsonNamingPolicy.CamelCase,//JSON'daki alan isimlerinin camelCase formatında olmasını sağlar.
+                    PropertyNamingPolicy=JsonNamingPolicy.CamelCase,//JSON'daki alan isimler    inin camelCase formatında olmasını sağlar.
                 });
 
                 if (tokenModel != null)

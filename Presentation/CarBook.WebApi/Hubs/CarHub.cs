@@ -36,8 +36,6 @@ namespace CarBook.WebApi.Hubs
         public async Task BlogLikeDislike(int BlogId,int UserId,bool UserVote)
         {
 
-
-
                 var createBlogLikeModel = new CreateBlogLikeModel
                 {
                     AppUserID = UserId,
@@ -46,13 +44,10 @@ namespace CarBook.WebApi.Hubs
                 };
 
 
-
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(createBlogLikeModel);
                 StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                 var responseMessage = await client.PostAsync("https://localhost:7192/api/BlogLikes", content);
-
-
 
 
                 var client2 = _httpClientFactory.CreateClient();
@@ -62,15 +57,12 @@ namespace CarBook.WebApi.Hubs
                 var values = JsonConvert.DeserializeObject<ResultBlogLikeModel>(dataJson);
 
 
-                await Clients.All.SendAsync("ReceiveBlogLikeDislike", BlogId,values.LikeCount,values.DislikeCount);
-                await Clients.User(userId:UserId.ToString()).SendAsync("ReceiveBlogLikeDislike",UserId, values!.UserVote);
+                await Clients.Others.SendAsync("ReceiveBlogLikeDislikeOthers", BlogId,UserId ,values.LikeCount,values.DislikeCount);
+
+
+                await Clients.Caller.SendAsync("ReceiveBlogLikeDislike", BlogId, UserId, values!.UserVote, values.LikeCount, values.DislikeCount);
             
                
-               
-          
-
-
-           
             
         }
 

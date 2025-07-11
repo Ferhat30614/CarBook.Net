@@ -2,8 +2,10 @@
 
 
 
-    const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7192/carhub")
-        .configureLogging(signalR.LogLevel.Information).build();
+    const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7192/carhub",
+        {
+            /*withCredentials=true  // BU SATIR OLMAZSA COOKIE GİTMEZ*/
+        }).configureLogging(signalR.LogLevel.Information).build();
 
 
 
@@ -71,6 +73,31 @@
 
         btnLike.text("👍 " + likeCount);
         btnDislike.text("👎 " + disikeCount);
+
+
+
+
+
+    });
+
+
+    connection.on("ReceiveBlogLikeDislikeOthers", (BlogId, UserId, LikeCount, DislikeCount) => {
+
+
+        console.log("Others değer bu şekilde olur    " + BlogId);
+        console.log("Others değer bu şekilde olur    " + UserId);
+        console.log("Others değer bu şekilde olur    " + LikeCount);
+        console.log("Others değer bu şekilde olur    " + DislikeCount);
+
+        const btnLike = $("#btn-like");
+        const btnDislike = $("#btn-dislike");
+
+
+       
+
+
+        btnLike.text("👍 " + LikeCount);
+        btnDislike.text("👎 " + DislikeCount);
 
 
 
