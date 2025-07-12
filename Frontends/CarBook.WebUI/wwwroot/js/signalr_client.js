@@ -1,16 +1,10 @@
 ﻿$(document).ready(function () {
 
-
     //function getCookie(name) {
     //    let value = "; " + document.cookie;
     //    let parts = value.split("; " + name + "=");
     //    if (parts.length === 2) return parts.pop().split(";").shift();
     //}
-
-
-
-    
-
     //const token = getCookie("CarBookJwt");
 
     //console.log("Token: ", token);  // Token'ı burada kontrol edebilirsiniz.
@@ -22,9 +16,6 @@
 
 
     const currentBlogId= parseInt(document.getElementById("blog-id").value);
-
-    /*const BlogId = 0;*/
-
 
 //    "query string" nedir
 //        Bir URL'nin sonuna ? ile başlayan ek parametreler kısmıdır. Örnek:
@@ -162,6 +153,21 @@
 
 
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
