@@ -1,15 +1,23 @@
 ﻿$(document).ready(function () {
 
 
+    //function getCookie(name) {
+    //    let value = "; " + document.cookie;
+    //    let parts = value.split("; " + name + "=");
+    //    if (parts.length === 2) return parts.pop().split(";").shift();
+    //}
 
 
-    const token = getCookie("CarBookJwt");
 
-    const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7192/carhub",
-        {
-            /*withCredentials=true  // BU SATIR OLMAZSA COOKIE GİTMEZ*/
-            accessTokenFactory: () => token   // burdan jwt ı gönderiyorum ve query string olarak gönderiyorum
-        }).configureLogging(signalR.LogLevel.Information)
+    
+
+    //const token = getCookie("CarBookJwt");
+
+    //console.log("Token: ", token);  // Token'ı burada kontrol edebilirsiniz.
+
+
+    const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7192/carhub")
+        .configureLogging(signalR.LogLevel.Information)
         .build();
 
 
@@ -43,8 +51,6 @@
     });
 
     start();
-
-
 
 
     connection.on("ReceiveBlogLikeDislike", (BlogId, UserId, UserVote,likeCount,disikeCount) => {
@@ -87,7 +93,6 @@
 
     });
 
-
     connection.on("ReceiveBlogLikeDislikeOthers", (BlogId, UserId, LikeCount, DislikeCount) => {
 
 
@@ -111,9 +116,6 @@
 
 
     });
-
-
-
 
 
     $("#btn-like").click(function () {

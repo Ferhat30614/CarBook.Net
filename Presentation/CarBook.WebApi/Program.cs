@@ -58,7 +58,7 @@ builder.Services.AddCors(opt =>
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddSignalR();  
+builder.Services.AddSignalR();              
 
 
 
@@ -74,7 +74,31 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateLifetime=true,
         ValidateIssuerSigningKey=true
     };
+
+    //opt.Events = new JwtBearerEvents   // burada acesse erişmek içiin tanımlar var
+    //{
+    //    OnMessageReceived = context =>
+    //    {
+    //        var accessToken = context.Request.Cookies["access_token"];
+    //        Console.WriteLine("Access Token from Query: " + accessToken);  // Token'ı burada kontrol edelim
+    //        var path = context.HttpContext.Request.Path;
+
+    //        if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/carhub"))
+    //        {
+    //            context.Token = accessToken;
+    //        }
+
+    //        return Task.CompletedTask;
+    //    }
+    //};
+
+
+
 });
+
+//builder.Services.AddAuthorization();
+
+
 
 #region Registiration
 // Add services to the container.
