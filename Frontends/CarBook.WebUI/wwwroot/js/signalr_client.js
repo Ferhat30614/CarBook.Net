@@ -21,6 +21,11 @@
         .build();
 
 
+    const currentBlogId= parseInt(document.getElementById("blog-id").value);
+
+    /*const BlogId = 0;*/
+
+
 //    "query string" nedir
 //        Bir URL'nin sonuna ? ile başlayan ek parametreler kısmıdır. Örnek:
 //    https://localhost:5001/carhub?access_token=eyJhbGciOi...
@@ -53,26 +58,24 @@
     start();
 
 
-    connection.on("ReceiveBlogLikeDislike", (BlogId, UserId, UserVote,likeCount,disikeCount) => {
+    connection.on("ReceiveBlogLikeDislike", (userVote,likeCount,disikeCount) => {
 
 
-        console.log("caller değer bu şekilde olur    " + BlogId);
-        console.log("caller  değer bu şekilde olur    " + UserId);
-        console.log("caller değer bu şekilde olur    " + UserVote);
-        console.log("caller  değer bu şekilde olur    " + likeCount);
-        console.log("caller  değer bu şekilde olur    " + disikeCount);
+        //console.log("caller değer bu şekilde olur    " + UserVote);
+        //console.log("caller  değer bu şekilde olur    " + likeCount);
+        //console.log("caller  değer bu şekilde olur    " + disikeCount);
 
         const btnLike = $("#btn-like");
         const btnDislike = $("#btn-dislike");
 
 
-        if (UserVote == true) {
+        if (userVote == true) {
 
             btnLike.removeClass("btn-outline-success").addClass("btn-success");
             btnDislike.removeClass("btn-danger").addClass("btn-outline-danger");
 
         }
-        else if (UserVote == false) {
+        else if (userVote == false) {
             btnDislike.removeClass("btn-outline-danger").addClass("btn-danger");
             btnLike.removeClass("btn-success").addClass("btn-outline-success");
 
@@ -87,31 +90,25 @@
         btnLike.text("👍 " + likeCount);
         btnDislike.text("👎 " + disikeCount);
 
-
-
-
-
     });
 
-    connection.on("ReceiveBlogLikeDislikeOthers", (BlogId, UserId, LikeCount, DislikeCount) => {
+    connection.on("ReceiveBlogLikeDislikeOthers", ( blogId,likeCount, dislikeCount) => {
 
 
-        console.log("Others değer bu şekilde olur    " + BlogId);
-        console.log("Others değer bu şekilde olur    " + UserId);
-        console.log("Others değer bu şekilde olur    " + LikeCount);
-        console.log("Others değer bu şekilde olur    " + DislikeCount);
-
-        const btnLike = $("#btn-like");
-        const btnDislike = $("#btn-dislike");
+        //console.log("Others değer bu şekilde olur    " + LikeCount);
+        //console.log("Others değer bu şekilde olur    " + DislikeCount);
 
 
-       
+        if (blogId != currentBlogId) {
+            return;
+        } else {
+            const btnLike = $("#btn-like");
+            const btnDislike = $("#btn-dislike");
 
+            btnLike.text("👍 " + likeCount);
+            btnDislike.text("👎 " + dislikeCount);
 
-        btnLike.text("👍 " + LikeCount);
-        btnDislike.text("👎 " + DislikeCount);
-
-
+        }
 
 
 
@@ -120,63 +117,49 @@
 
     $("#btn-like").click(function () {
 
-        const BlogId = parseInt(document.getElementById("blog-id").value);
-        const UserId = parseInt(document.getElementById("user-id").value);
+       /* const BlogId = parseInt(document.getElementById("blog-id").value);*/
+        const userId = parseInt(document.getElementById("user-id").value);
+        const userVote = true; 
 
-        if (UserId == 0) {
+        if (userId == 0) {
 
             window.location.href = "/Login/Index";  // eğer kullanıcı oturum açmadıysa beğeni işlemi yapamaz.Burda sayfa yönlendirdim.
             return ;
 
 
         }
-        const UserVote = true; 
+        
+        //console.log(BlogId);
+        //console.log(UserId);
+        //console.log(UserVote);
 
-
-        console.log(BlogId);
-        console.log(UserId);
-        console.log(UserVote);
-
-        connection.invoke("BlogLikeDislike", BlogId, UserId, UserVote).catch(function (err) {
+        connection.invoke("BlogLikeDislike", currentBlogId, userId, userVote).catch(function (err) {
             console.error(err.toString());
         });
-
-
-
-
-
-
-        
 
     })
 
 
     $("#btn-dislike").click(function () {
 
-        const BlogId = parseInt(document.getElementById("blog-id").value);
-        const UserId = parseInt(document.getElementById("user-id").value);
-        const UserVote = false; 
+        /*const BlogId = parseInt(document.getElementById("blog-id").value);*/
+        const userId = parseInt(document.getElementById("user-id").value);
+        const userVote = false; 
 
 
-        if (UserId == 0) {
+        if (userId == 0) {
             window.location.href = "/Login/Index";
             return ;
         }
 
+        //console.log(BlogId);
+        //console.log(UserId);
+        //console.log(UserVote);
 
-        console.log(BlogId);
-        console.log(UserId);
-        console.log(UserVote);
-
-
-
-
-        connection.invoke("BlogLikeDislike", BlogId, UserId, UserVote).catch(function (err) {
+        connection.invoke("BlogLikeDislike", currentBlogId, userId, userVote).catch(function (err) {
             console.error(err.toString());
         });
 
-
-        
 
     })
 
