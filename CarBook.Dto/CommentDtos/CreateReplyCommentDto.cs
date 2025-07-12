@@ -13,6 +13,6 @@ namespace CarBook.Dto.CommentDtos
         public int BlogID { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }
-        public int ParentCommentId { get; set; }  
+        public int? ParentCommentId { get; set; }  
     }
 }

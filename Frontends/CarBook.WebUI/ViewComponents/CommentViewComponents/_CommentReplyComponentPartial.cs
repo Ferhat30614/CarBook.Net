@@ -7,7 +7,7 @@ namespace CarBook.WebUI.ViewComponents.CommentViewComponents
     public class _CommentReplyComponentPartial : ViewComponent
     {
        
-        public async Task<IViewComponentResult> InvokeAsync(int commentId)
+        public async Task<IViewComponentResult> InvokeAsync(int? commentId)
         {
             var value = new CreateReplyCommentDto
             {

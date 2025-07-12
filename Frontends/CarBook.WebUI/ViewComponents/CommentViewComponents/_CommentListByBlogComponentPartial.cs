@@ -12,8 +12,12 @@ namespace CarBook.WebUI.ViewComponents.CommentViewComponents
         {
             _httpClientFactory = httpClientFactory;
         }
-        public async Task<IViewComponentResult> InvokeAsync(int id)
+        public async Task<IViewComponentResult> InvokeAsync(int? id)
         {
+            if (id == null)
+            {
+                return Content(""); // veya boş PartialView
+            }
             ViewBag.v = id;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7192/api/Comments/GetCommentsByBlogIdWithReplies?id=" + id);

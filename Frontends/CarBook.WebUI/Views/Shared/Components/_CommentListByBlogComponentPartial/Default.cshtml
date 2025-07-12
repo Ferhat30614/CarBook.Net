@@ -1,13 +1,13 @@
 ﻿@model List<ResultCommentDto>
 
-    
 
-<ul class="comment-list">
+<div id="main-comments">
+    <ul class="comment-list">
 
-    @foreach (var comment in Model) 
-    {
-        @Html.Partial("_CommentItemPartial", comment)
-    }
+        @foreach (var comment in Model) 
+        {
+            @Html.Partial("_CommentItemPartial", comment)
+        }
 
-</ul>
-
+    </ul>
+</div>

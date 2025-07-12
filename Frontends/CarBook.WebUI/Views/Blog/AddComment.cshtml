@@ -1,7 +1,10 @@
 ﻿
+
+
+
 <div class="comment-form-wrap pt-5">
     <h3 class="mb-5">Bir Yorum Bırakın</h3>
-    <form method="post" asp-action="AddComment" asp-controller="Blog" class="p-5 bg-light">
+    <form id="commentForm"  method="post" asp-action="AddComment" asp-controller="Blog" class="p-5 bg-light">
         <div class="form-group">
             <label for="name">Adınız Soyadınız *</label>
             <input type="text" name="Name" class="form-control" id="name">
@@ -23,3 +26,36 @@
 
     </form>
 </div>
+
+
+
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#commentForm").submit(function (e) {
+            e.preventDefault(); // normal post engellenir
+
+            var form = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: form.attr("action"),
+                data: form.serialize(),
+                success: function (result) {
+                    var blogId = $("#BlogID").val();
+                    $.get("/Blog/GetCommentsPartial?blogId=" + blogId, function (html) {
+                        console.log("Gelen HTML:", html);
+                        console.log($("#main-comments").length);
+
+                        $("#main-comments").html(html);
+                        form[0].reset(); // formu temizle
+                    });
+                },
+                error: function () {
+                    alert("Hata oluştu.");
+                }
+            });
+        });
+    });
+</script>
