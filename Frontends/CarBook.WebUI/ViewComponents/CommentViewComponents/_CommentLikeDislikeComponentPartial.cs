@@ -15,7 +15,7 @@ namespace CarBook.WebUI.ViewComponents.CommentViewComponents
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int id)
+        public async Task<IViewComponentResult> InvokeAsync(int? id)
         {
 
             var userId = 0;

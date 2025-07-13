@@ -9,6 +9,13 @@ namespace CarBook.WebUI.ViewComponents.CommentViewComponents
        
         public async Task<IViewComponentResult> InvokeAsync(int? commentId)
         {
+
+            if (commentId == null || commentId == 0)
+            {
+                Console.WriteLine("COMMENTID NULL → BOŞ DÖNDÜM");
+                return Content("");
+            }
+
             var value = new CreateReplyCommentDto
             {
                 ParentCommentId = commentId,

@@ -6,17 +6,26 @@
     </div>
     <div class="comment-body">
         <h3>@Model.Name</h3>
-        <div class="meta">@(((DateTime)Model.CreatedDate).ToString("dd-MMM-yyyy"))</div>
+        <div class="meta">@Model.CreatedDate.ToString("dd-MMM-yyyy")</div>
         <p>@Model.Description</p>
 
         <div style="display: flex; align-items: center; gap: 10px;">
-            @await Component.InvokeAsync("_CommentLikeDislikeComponentPartial", new { id = Model.CommentID })
+            @if (Model.CommentID != 0)
+            {
+                @await Component.InvokeAsync("_CommentLikeDislikeComponentPartial", new { id = Model.CommentID })
+            }
 
-            <button class="btn btn-primary btn-sm" type="button" onclick="toggleReplyForm(@Model.CommentID)">Yanıtla</button>
+            @if (Model.CommentID != 0)
+            {
+                <button class="btn btn-primary btn-sm" type="button" onclick="toggleReplyForm(@Model.CommentID)">Yanıtla</button>
+            }
         </div>
 
         <div id="reply-form-@Model.CommentID" style="display: none; margin-top:10px;">
-            @await Component.InvokeAsync("_CommentReplyComponentPartial", new { commentId = Model.CommentID })
+            @if (Model.CommentID != 0)
+            {
+                @await Component.InvokeAsync("_CommentReplyComponentPartial", new { commentId = Model.CommentID })
+            }
         </div>
 
         @if (Model.Replies != null && Model.Replies.Count > 0)
@@ -38,7 +47,6 @@
         }
     </div>
 </li>
-
 
 <script>
     function toggleReplyForm(commentId) {
