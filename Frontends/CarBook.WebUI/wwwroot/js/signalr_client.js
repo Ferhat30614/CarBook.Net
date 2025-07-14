@@ -17,8 +17,7 @@
 
     const currentBlogId = parseInt(document.getElementById("blog-id").value);
 
-    const currentUserIdForMessage = parseInt(document.getElementById("currentUserId").value);
-    const otherUserIdForMessage = parseInt(document.getElementById("otherUserId").value);
+   
 
 //    "query string" nedir
 //        Bir URL'nin sonuna ? ile başlayan ek parametreler kısmıdır. Örnek:
@@ -156,6 +155,11 @@
 
 
     })
+
+
+
+
+
 
 
 

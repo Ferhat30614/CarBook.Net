@@ -16,7 +16,7 @@ namespace CarBook.WebUI.Controllers
         public MessageController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
-        }
+        }   
 
 
         public async Task<IActionResult> Index()

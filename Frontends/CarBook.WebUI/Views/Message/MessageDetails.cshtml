@@ -6,6 +6,14 @@
 @model List<ResultMessageDetailsDto>
 
 
+
+
+
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/signalR/signalr.min.js"></script>
+<script src="~/js/signalr_client_message.js"></script>
+
+
 <div class="user-info">
     <div class="user-photo">
 
@@ -41,8 +49,8 @@
     <form asp-controller="Message" asp-action="CreateMessage" method="post" class="message-form">
         <input type="hidden" name="ReceiverId"  id="otherUserId" value="@ViewBag.OtherUserId" />
         <input type="hidden" name="SenderID" id="currentUserId" value="@ViewBag.UserId" />
-        <textarea name="Content" class="form-control" placeholder="Yanıtınızı yazın..." rows="3"></textarea>
-        <button type="submit" class="btn btn-success btn-sm mt-2">Gönder</button>
+        <textarea name="Content" class="form-control"  id="replyMessageContent"  placeholder="Yanıtınızı yazın..." rows="3"></textarea>
+        <button type="button" id="btn-send-message" class="btn btn-success btn-sm mt-2">Gönder</button>
     </form>
 </div>
 
@@ -156,3 +164,7 @@
         }
 
 </style>
+
+
+
+

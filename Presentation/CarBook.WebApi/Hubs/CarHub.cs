@@ -8,23 +8,13 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using CarBook.WebApi.Models.MessageModels;
 
 
 namespace CarBook.WebApi.Hubs
 {
-    public class CarHub:Hub
+    public class CarHub(IHttpClientFactory _httpClientFactory) :Hub
     {
-
-        private readonly IHttpClientFactory _httpClientFactory;
-
-        public CarHub(IHttpClientFactory httpClientFactory)
-        {
-            _httpClientFactory = httpClientFactory;
-        }
-
-
-
-
 
         //public override async Task OnConnectedAsync()
         //{
@@ -104,6 +94,38 @@ namespace CarBook.WebApi.Hubs
 
         }
 
+
+
+        public async Task AddAndUpdateMessage(int CurrentUserIdForMessage, int OtherUserIdForMessage, string MessageContent)
+        {
+
+            // Mesaj Ekle 
+
+            var createMessageModel = new CreateMessageModel
+            {
+                SenderID = CurrentUserIdForMessage,
+                ReceiverID = OtherUserIdForMessage,
+                Content = MessageContent    
+            };
+
+
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createMessageModel);
+            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7192/api/Messages", content);
+
+            //Güncel Mesajları getir 
+
+
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync($"https://localhost:7192/api/Messages?senderId={OtherUserIdForMessage}&receiverId={CurrentUserIdForMessage}");
+            
+            var dataJson = await responseMessage2.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<ResultMessageDetailsModel>>(dataJson);
+
+            await Clients.All.SendAsync("getUpdatedMessages", values);
+             
+        }
 
     }
 }
