@@ -35,10 +35,55 @@
 
     start();
 
-    connection.on("getUpdatedMessages", (messages) => {
+    connection.on("getUpdatedMessages", (messages,senderId,receiverId) => {
 
-        console.log("mesajlar");
-        console.log(messages);
+       
+
+        if ((currentUserIdForMessage == senderId && otherUserIdForMessage == receiverId) || (currentUserIdForMessage == receiverId && otherUserIdForMessage == senderId)) {
+
+
+
+            const messagesDiv = document.querySelector('.messages');
+            messagesDiv.innerHTML = ""; // önce mevcut mesajları temizle
+
+            messages.forEach(msg => {
+
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+
+                const senderIdValue = parseInt(msg.senderID);
+               
+
+                if (senderIdValue === currentUserIdForMessage) {
+                    messageDiv.classList.add('sent');
+                } else {
+                    messageDiv.classList.add('received');
+                }
+
+                messageDiv.innerHTML = `
+                <div class="message-content">
+                    <p>${msg.content}</p>
+                    <span class="message-time">${msg.createdDate.slice(11, 16)}</span>
+                </div>
+                `;
+
+                messagesDiv.appendChild(messageDiv);
+            });
+
+
+            document.getElementById("replyMessageContent").value = "";
+            
+            
+
+
+
+
+
+
+
+
+
+        }
 
 
 

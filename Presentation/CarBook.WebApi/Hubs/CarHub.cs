@@ -99,31 +99,44 @@ namespace CarBook.WebApi.Hubs
         public async Task AddAndUpdateMessage(int CurrentUserIdForMessage, int OtherUserIdForMessage, string MessageContent)
         {
 
-            // Mesaj Ekle 
 
-            var createMessageModel = new CreateMessageModel
-            {
-                SenderID = CurrentUserIdForMessage,
-                ReceiverID = OtherUserIdForMessage,
-                Content = MessageContent    
-            };
+            var messageContent=MessageContent.Trim();
+
+            if (!string.IsNullOrEmpty(messageContent)) {
 
 
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createMessageModel);
-            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7192/api/Messages", content);
+                // Mesaj Ekle 
 
-            //Güncel Mesajları getir 
+                var createMessageModel = new CreateMessageModel
+                {
+                    SenderID = CurrentUserIdForMessage,
+                    ReceiverID = OtherUserIdForMessage,
+                    Content = MessageContent
+                };
 
 
-            var client2 = _httpClientFactory.CreateClient();
-            var responseMessage2 = await client2.GetAsync($"https://localhost:7192/api/Messages?senderId={OtherUserIdForMessage}&receiverId={CurrentUserIdForMessage}");
-            
-            var dataJson = await responseMessage2.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<List<ResultMessageDetailsModel>>(dataJson);
+                var client = _httpClientFactory.CreateClient();
+                var jsonData = JsonConvert.SerializeObject(createMessageModel);
+                StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                var responseMessage = await client.PostAsync("https://localhost:7192/api/Messages", content);
 
-            await Clients.All.SendAsync("getUpdatedMessages", values);
+                //Güncel Mesajları getir 
+
+
+                var client2 = _httpClientFactory.CreateClient();
+                var responseMessage2 = await client2.GetAsync($"https://localhost:7192/api/Messages?senderId={OtherUserIdForMessage}&receiverId={CurrentUserIdForMessage}");
+
+                var dataJson = await responseMessage2.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultMessageDetailsModel>>(dataJson);
+
+                await Clients.All.SendAsync("getUpdatedMessages", values, CurrentUserIdForMessage, OtherUserIdForMessage);
+
+
+            }     
+
+
+
+
              
         }
 
