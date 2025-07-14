@@ -6,10 +6,8 @@
         .build();
 
 
-
     const currentUserIdForMessage = parseInt(document.getElementById("currentUserId").value);
     const otherUserIdForMessage = parseInt(document.getElementById("otherUserId").value);
-
 
 
     async function start() {
@@ -37,45 +35,53 @@
 
     connection.on("getUpdatedMessages", (messages,senderId,receiverId) => {
 
-       
-
-        if ((currentUserIdForMessage == senderId && otherUserIdForMessage == receiverId) || (currentUserIdForMessage == receiverId && otherUserIdForMessage == senderId)) {
-
+        if ((currentUserIdForMessage == senderId && otherUserIdForMessage == receiverId)
+            || (currentUserIdForMessage == receiverId && otherUserIdForMessage == senderId)) {
 
 
-            const messagesDiv = document.querySelector('.messages');
-            messagesDiv.innerHTML = ""; // önce mevcut mesajları temizle
+            const messagesDiv = document.querySelector(".messages");//querySelector
+            messagesDiv.innerHTML = "";
 
             messages.forEach(msg => {
 
+
                 const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message');
+                messageDiv.classList.add("message");
 
                 const senderIdValue = parseInt(msg.senderID);
-               
 
                 if (senderIdValue === currentUserIdForMessage) {
+
                     messageDiv.classList.add('sent');
+
                 } else {
+
                     messageDiv.classList.add('received');
+
                 }
 
                 messageDiv.innerHTML = `
+
                 <div class="message-content">
-                    <p>${msg.content}</p>
-                    <span class="message-time">${msg.createdDate.slice(11, 16)}</span>
-                </div>
+                        <p>${msg.content}</p>
+                        <span class="message-time">${msg.createdDate.slice(11,16) }</span>   
+                    </div>
+
+
                 `;
 
-                messagesDiv.appendChild(messageDiv);
+                messagesDiv.appendChild(messageDiv);//appendChild   birde slice  , innerhtml
+
+
             });
 
 
-            document.getElementById("replyMessageContent").value = "";
-            
-            
+            if (currentUserIdForMessage === senderId) {
+                document.getElementById("replyMessageContent").value = "";
 
+            }
 
+            
 
 
 
@@ -84,8 +90,6 @@
 
 
         }
-
-
 
     });
 
